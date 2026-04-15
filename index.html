@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌞 Grade 3 Fun Learning | English Adventures</title>
+  <meta name="description" content="Interactive Grade 3 English learning with writing, drawing, reading, and speaking activities. Fun and engaging for young learners!" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">🌞 Grade 3</div>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="showSection('home')">🏠 Home</button>
+      <button class="nav-btn" onclick="showSection('characters')">👫 Characters</button>
+      <button class="nav-btn" onclick="showSection('menu')">🚀 Activities</button>
+      <button class="nav-btn" onclick="showActivity('vocabulary')">🎮 Vocabulary</button>
+      <button class="nav-btn" onclick="showSection('challenge')">🌟 Challenges</button>
+    </div>
+    <div class="nav-hamburger" onclick="toggleMobileNav()" id="hamburger">☰</div>
+  </nav>
+
+  <!-- ===== SECTION 1: HOME ===== -->
+  <section id="home" class="section active">
+    <div class="hero-bg">
+      <div class="floating-letters">
+        <span class="letter l1">A</span>
+        <span class="letter l2">B</span>
+        <span class="letter l3">C</span>
+        <span class="letter l4">D</span>
+        <span class="letter l5">E</span>
+        <span class="letter l6">F</span>
+        <span class="letter l7">G</span>
+        <span class="letter l8">H</span>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">✨ English for Kids</div>
+        <h1 class="hero-title">🌞 Welcome to our<br/><span class="gradient-text">world of fun learning!</span></h1>
+        <p class="hero-subtitle">Learning English is fun!<br/>Games, creativity & communication!</p>
+        <div class="hero-icons">
+          <div class="hero-icon-card">
+            <span class="icon-big">✍️</span>
+            <span>Writing</span>
+          </div>
+          <div class="hero-icon-card">
+            <span class="icon-big">🎨</span>
+            <span>Drawing</span>
+          </div>
+          <div class="hero-icon-card">
+            <span class="icon-big">💬</span>
+            <span>Speaking</span>
+          </div>
+          <div class="hero-icon-card">
+            <span class="icon-big">📖</span>
+            <span>Reading</span>
+          </div>
+          <div class="hero-icon-card">
+            <span class="icon-big">🎮</span>
+            <span>Vocabulary</span>
+          </div>
+        </div>
+        <button class="btn-primary pulse" onclick="showSection('characters')" id="start-learning-btn">
+          👉 Start Learning
+        </button>
+      </div>
+      <div class="hero-illustration">
+        <div class="kids-scene">
+          <div class="kid kid1">🧒</div>
+          <div class="kid kid2">👧</div>
+          <div class="kid kid3">👦</div>
+          <div class="scene-items">
+            <span class="item pencil">✏️</span>
+            <span class="item book">📚</span>
+            <span class="item star">⭐</span>
+            <span class="item paint">🖌️</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-arrow" onclick="showSection('characters')">⬇️</div>
+  </section>
+
+  <!-- ===== SECTION 2: CHARACTERS ===== -->
+  <section id="characters" class="section">
+    <div class="section-header">
+      <h2>👫 Meet the Characters!</h2>
+      <p>Your friends on this learning adventure</p>
+    </div>
+    <div class="characters-grid">
+
+      <!-- MISODIS -->
+      <div class="character-card teacher-card">
+        <div class="character-avatar teacher-avatar">
+          <img src="misodis.png" alt="Teacher Misodis" class="char-img" />
+        </div>
+        <div class="character-badge teacher-badge">Teacher</div>
+        <h3 class="character-name">MISODIS</h3>
+        <p class="character-subtitle">Meet your teacher!</p>
+        <div class="speech-bubble teacher-bubble">
+          "I love teaching!"
+        </div>
+        <button class="btn-character teacher-btn" id="hello-btn" onclick="helloMisodis()">👋 Hello!</button>
+        <div id="misodis-response" class="character-response hidden">
+          ✨ Hello, dear student! Ready to learn? 🌟
+        </div>
+      </div>
+
+      <!-- LAURA -->
+      <div class="character-card laura-card">
+        <div class="character-avatar laura-avatar">
+          <img src="laura.png" alt="Teacher Laura" class="char-img" />
+        </div>
+        <div class="character-badge laura-badge">Teacher</div>
+        <h3 class="character-name">LAURA</h3>
+        <p class="character-subtitle">Let's have fun!</p>
+        <div class="activity-box">
+          <p class="activity-question">🤔 What do you like?</p>
+          <div class="like-options">
+            <button class="like-btn" id="like-games" onclick="selectLike(this,'🎮 Games are awesome!')">🎮 I like games</button>
+            <button class="like-btn" id="like-drawing" onclick="selectLike(this,'🎨 Drawing is creative!')">🎨 I like drawing</button>
+            <button class="like-btn" id="like-reading" onclick="selectLike(this,'📖 Reading is wonderful!')">📖 I like reading</button>
+          </div>
+          <div id="laura-response" class="laura-response hidden"></div>
+        </div>
+      </div>
+
+      <!-- DANNY -->
+      <div class="character-card daniel-card">
+        <div class="character-avatar daniel-avatar">
+          <img src="danny.png" alt="Teacher Danny" class="char-img" />
+        </div>
+        <div class="character-badge daniel-badge">Teacher</div>
+        <h3 class="character-name">DANNY</h3>
+        <p class="character-subtitle">Let's learn together!</p>
+        <div class="daniel-options">
+          <button class="daniel-btn" id="sing-btn" onclick="danielActivity('🎵 La la la! Great singing!')">🎵 Sing a song</button>
+          <button class="daniel-btn" id="draw-btn" onclick="danielActivity('🎨 Beautiful drawing!')">🎨 Draw something</button>
+          <button class="daniel-btn" id="write-btn" onclick="danielActivity('✏️ Excellent writing!')">✏️ Write a sentence</button>
+        </div>
+        <div id="daniel-response" class="daniel-response hidden"></div>
+      </div>
+
+    </div>
+
+    <div class="section-footer">
+      <button class="btn-primary" onclick="showSection('menu')" id="go-activities-btn">🚀 Go to Activities ➡️</button>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: ACTIVITIES MENU ===== -->
+  <section id="menu" class="section">
+    <div class="section-header">
+      <h2>🚀 Grade 3 Activities</h2>
+      <p>Choose your adventure!</p>
+    </div>
+    <div class="menu-grid">
+      <button class="menu-card writing-card" onclick="showActivity('writing')" id="menu-writing">
+        <span class="menu-icon">✏️</span>
+        <span class="menu-label">Writing</span>
+        <span class="menu-desc">Express your ideas!</span>
+      </button>
+      <button class="menu-card drawing-card" onclick="showActivity('drawing')" id="menu-drawing">
+        <span class="menu-icon">🎨</span>
+        <span class="menu-label">Drawing</span>
+        <span class="menu-desc">Create & describe!</span>
+      </button>
+      <button class="menu-card reading-card" onclick="showActivity('reading')" id="menu-reading">
+        <span class="menu-icon">📖</span>
+        <span class="menu-label">Reading</span>
+        <span class="menu-desc">Read & understand!</span>
+      </button>
+      <button class="menu-card speaking-card" onclick="showActivity('speaking')" id="menu-speaking">
+        <span class="menu-icon">💬</span>
+        <span class="menu-label">Speaking</span>
+        <span class="menu-desc">Talk & share!</span>
+      </button>
+      <button class="menu-card vocab-card" onclick="showActivity('vocabulary')" id="menu-vocab">
+        <span class="menu-icon">🎮</span>
+        <span class="menu-label">Vocabulary</span>
+        <span class="menu-desc">Match words & pictures!</span>
+      </button>
+    </div>
+    <div class="challenge-promo">
+      <button class="btn-challenge" onclick="showSection('challenge')" id="try-challenge-btn">
+        🌟 Try a Challenge!
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4a: WRITING ACTIVITY ===== -->
+  <section id="activity-writing" class="section activity-section">
+    <div class="activity-header writing-header">
+      <h2>✏️ Let's Write!</h2>
+    </div>
+    <div class="activity-content">
+      <div class="animal-display">
+        <div class="animal-emoji" id="animal-emoji">🐘</div>
+        <p class="animal-guide">Write 3 sentences about the animal</p>
+      </div>
+      <div class="writing-guide">
+        <div class="guide-item">
+          <span class="guide-num">1</span>
+          <span>It is a <strong>___</strong></span>
+        </div>
+        <div class="guide-item">
+          <span class="guide-num">2</span>
+          <span>It is <strong>big / small</strong></span>
+        </div>
+        <div class="guide-item">
+          <span class="guide-num">3</span>
+          <span>It can <strong>___</strong></span>
+        </div>
+      </div>
+      <div class="sentences-input">
+        <div class="sentence-row">
+          <span class="sentence-num">1.</span>
+          <input type="text" id="sentence1" class="sentence-input" placeholder="It is a..." maxlength="80"/>
+        </div>
+        <div class="sentence-row">
+          <span class="sentence-num">2.</span>
+          <input type="text" id="sentence2" class="sentence-input" placeholder="It is..." maxlength="80"/>
+        </div>
+        <div class="sentence-row">
+          <span class="sentence-num">3.</span>
+          <input type="text" id="sentence3" class="sentence-input" placeholder="It can..." maxlength="80"/>
+        </div>
+      </div>
+      <div class="activity-actions">
+        <button class="btn-check" onclick="checkWriting()" id="check-writing-btn">✅ Check my sentences</button>
+        <button class="btn-change-animal" onclick="changeAnimal()" id="change-animal-btn">🔀 Change animal</button>
+      </div>
+      <div id="writing-feedback" class="feedback-box hidden"></div>
+    </div>
+    <button class="btn-back" onclick="showSection('menu')" id="back-from-writing">🔙 Back to menu</button>
+  </section>
+
+  <!-- ===== SECTION 4b: DRAWING ACTIVITY ===== -->
+  <section id="activity-drawing" class="section activity-section">
+    <div class="activity-header drawing-header">
+      <h2>🎨 Draw and Describe</h2>
+    </div>
+    <div class="activity-content">
+      <p class="activity-instruction">Draw your favorite place below!</p>
+      <div class="canvas-container">
+        <canvas id="drawingCanvas" width="600" height="350"></canvas>
+        <div class="canvas-toolbar">
+          <div class="color-palette">
+            <button class="color-btn" style="background:#ff6b6b" onclick="setColor('#ff6b6b')" title="Red"></button>
+            <button class="color-btn" style="background:#ffd93d" onclick="setColor('#ffd93d')" title="Yellow"></button>
+            <button class="color-btn" style="background:#6bcb77" onclick="setColor('#6bcb77')" title="Green"></button>
+            <button class="color-btn" style="background:#4d96ff" onclick="setColor('#4d96ff')" title="Blue"></button>
+            <button class="color-btn" style="background:#c77dff" onclick="setColor('#c77dff')" title="Purple"></button>
+            <button class="color-btn" style="background:#ff9a3c" onclick="setColor('#ff9a3c')" title="Orange"></button>
+            <button class="color-btn" style="background:#333" onclick="setColor('#333')" title="Black"></button>
+            <button class="color-btn" style="background:#fff;border:2px solid #ccc" onclick="setColor('#fff')" title="Eraser"></button>
+          </div>
+          <div class="brush-sizes">
+            <button class="size-btn" onclick="setBrush(4)" id="size-sm">S</button>
+            <button class="size-btn active" onclick="setBrush(10)" id="size-md">M</button>
+            <button class="size-btn" onclick="setBrush(20)" id="size-lg">L</button>
+          </div>
+          <button class="btn-clear" onclick="clearCanvas()" id="clear-canvas-btn">🗑️ Clear</button>
+        </div>
+      </div>
+      <p class="activity-instruction" style="margin-top:1.5rem;">Now write 2 sentences about your drawing:</p>
+      <div class="sentences-input">
+        <div class="sentence-row">
+          <span class="sentence-num">1.</span>
+          <input type="text" id="draw-sentence1" class="sentence-input" placeholder="This is my..." maxlength="80"/>
+        </div>
+        <div class="sentence-row">
+          <span class="sentence-num">2.</span>
+          <input type="text" id="draw-sentence2" class="sentence-input" placeholder="It is..." maxlength="80"/>
+        </div>
+      </div>
+      <div class="example-box">
+        <span class="example-label">💡 Example:</span>
+        <span>This is my house · It is blue</span>
+      </div>
+      <button class="btn-check" onclick="checkDrawing()" id="check-drawing-btn">🎉 Submit my work!</button>
+      <div id="drawing-feedback" class="feedback-box hidden"></div>
+    </div>
+    <button class="btn-back" onclick="showSection('menu')" id="back-from-drawing">🔙 Back to menu</button>
+  </section>
+
+  <!-- ===== SECTION 4c: READING ACTIVITY ===== -->
+  <section id="activity-reading" class="section activity-section">
+    <div class="activity-header reading-header">
+      <h2>📖 Reading Time</h2>
+    </div>
+    <div class="activity-content">
+      <div class="story-card">
+        <div class="story-icon">🐕</div>
+        <p class="story-text">
+          Tom has a <strong>dog</strong>. The dog is <strong>brown</strong>. It is very <strong>friendly</strong>.
+        </p>
+      </div>
+      <div class="questions-section">
+        <h3>📝 Answer the questions:</h3>
+        <div class="question-block" id="q1-block">
+          <p class="question">1. What is it?</p>
+          <div class="answer-options">
+            <button class="answer-btn" onclick="checkAnswer(1,'a')" id="q1a">🐱 A cat</button>
+            <button class="answer-btn" onclick="checkAnswer(1,'b')" id="q1b">🐕 A dog</button>
+            <button class="answer-btn" onclick="checkAnswer(1,'c')" id="q1c">🐦 A bird</button>
+          </div>
+          <div id="q1-result" class="answer-result hidden"></div>
+        </div>
+        <div class="question-block" id="q2-block">
+          <p class="question">2. What color is it?</p>
+          <div class="answer-options">
+            <button class="answer-btn" onclick="checkAnswer(2,'a')" id="q2a">⚫ Black</button>
+            <button class="answer-btn" onclick="checkAnswer(2,'b')" id="q2b">🟤 Brown</button>
+            <button class="answer-btn" onclick="checkAnswer(2,'c')" id="q2c">⬜ White</button>
+          </div>
+          <div id="q2-result" class="answer-result hidden"></div>
+        </div>
+        <div class="question-block" id="q3-block">
+          <p class="question">3. Is it friendly?</p>
+          <div class="answer-options">
+            <button class="answer-btn" onclick="checkAnswer(3,'a')" id="q3a">✅ Yes, it is</button>
+            <button class="answer-btn" onclick="checkAnswer(3,'b')" id="q3b">❌ No, it isn't</button>
+          </div>
+          <div id="q3-result" class="answer-result hidden"></div>
+        </div>
+      </div>
+      <div id="reading-score" class="score-box hidden"></div>
+    </div>
+    <button class="btn-back" onclick="showSection('menu')" id="back-from-reading">🔙 Back to menu</button>
+  </section>
+
+  <!-- ===== SECTION 4d: SPEAKING ACTIVITY ===== -->
+  <section id="activity-speaking" class="section activity-section">
+    <div class="activity-header speaking-header">
+      <h2>💬 Let's Speak!</h2>
+    </div>
+    <div class="activity-content">
+      <div class="speaking-prompt">
+        <p class="activity-instruction">Talk about your favorite animal 🐾</p>
+        <div class="speaking-guide">
+          <div class="guide-chip">
+            <span>🐾</span> My favorite animal is...
+          </div>
+          <div class="guide-chip">
+            <span>👀</span> It is...
+          </div>
+          <div class="guide-chip">
+            <span>❤️</span> I like it because...
+          </div>
+        </div>
+      </div>
+      <div class="mic-section">
+        <button class="mic-btn" id="mic-btn" onclick="toggleSpeaking()">
+          <span id="mic-icon">🎤</span>
+          <span id="mic-label">Start Speaking</span>
+        </button>
+        <div id="speaking-timer" class="speaking-timer hidden">
+          <div class="timer-ring">
+            <span id="timer-count">30</span>
+          </div>
+          <p>seconds remaining</p>
+        </div>
+        <div id="speaking-waves" class="speaking-waves hidden">
+          <span class="wave w1"></span>
+          <span class="wave w2"></span>
+          <span class="wave w3"></span>
+          <span class="wave w4"></span>
+          <span class="wave w5"></span>
+        </div>
+      </div>
+      <div id="speaking-feedback" class="feedback-box hidden"></div>
+      <div class="animal-selector">
+        <p>Choose an animal to talk about:</p>
+        <div class="animal-options">
+          <button class="animal-opt" onclick="selectAnimal('🐶','dog')">🐶</button>
+          <button class="animal-opt" onclick="selectAnimal('🐱','cat')">🐱</button>
+          <button class="animal-opt" onclick="selectAnimal('🦁','lion')">🦁</button>
+          <button class="animal-opt" onclick="selectAnimal('🐬','dolphin')">🐬</button>
+          <button class="animal-opt" onclick="selectAnimal('🦋','butterfly')">🦋</button>
+          <button class="animal-opt" onclick="selectAnimal('🐘','elephant')">🐘</button>
+        </div>
+        <div id="selected-animal-display" class="selected-animal hidden"></div>
+      </div>
+    </div>
+    <button class="btn-back" onclick="showSection('menu')" id="back-from-speaking">🔙 Back to menu</button>
+  </section>
+
+  <!-- ===== SECTION 4e: VOCABULARY GAME ===== -->
+  <section id="activity-vocabulary" class="section activity-section">
+    <div class="activity-header vocab-header">
+      <h2>🎮 Let's Play with Words!</h2>
+    </div>
+    <div class="activity-content">
+      <!-- Score bar -->
+      <div class="vocab-scorebar">
+        <div class="vocab-score-info">
+          <span id="vocab-score-label">Score: <strong id="vocab-score">0</strong></span>
+          <span id="vocab-level-label">Level <strong id="vocab-level">1</strong></span>
+        </div>
+        <div class="vocab-progress-bar">
+          <div class="vocab-progress-fill" id="vocab-progress-fill"></div>
+        </div>
+      </div>
+
+      <p class="activity-instruction">Match each <span class="highlight-word">word</span> to the correct <span class="highlight-img">picture</span>!</p>
+
+      <!-- Game Board -->
+      <div class="vocab-game-board" id="vocab-game-board">
+        <!-- Words column -->
+        <div class="vocab-column words-column" id="words-column">
+          <div class="vocab-col-title">📝 Words</div>
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- Connection area -->
+        <div class="vocab-connector">
+          <svg id="vocab-svg" width="80" height="100%" style="overflow:visible;"></svg>
+        </div>
+
+        <!-- Images column -->
+        <div class="vocab-column images-column" id="images-column">
+          <div class="vocab-col-title">🖼️ Pictures</div>
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+      <!-- Result bar -->
+      <div id="vocab-result" class="feedback-box hidden"></div>
+
+      <!-- Action buttons -->
+      <div class="vocab-actions">
+        <button class="btn-check" id="vocab-check-btn" onclick="checkVocabMatches()">✅ Check Matches!</button>
+        <button class="btn-change-animal" id="vocab-next-btn" onclick="loadVocabRound()" style="display:none;">🔀 Next Round!</button>
+      </div>
+
+      <!-- How to play hint -->
+      <div class="vocab-hint">
+        💡 <strong>How to play:</strong> Click a word, then click the matching picture!
+      </div>
+    </div>
+    <button class="btn-back" onclick="showSection('menu')" id="back-from-vocab">🔙 Back to menu</button>
+  </section>
+
+  <!-- ===== SECTION 5: CHALLENGE ZONE ===== -->
+  <section id="challenge" class="section">
+    <div class="challenge-header">
+      <div class="star-burst">🌟</div>
+      <h2>Challenge Zone</h2>
+      <p>Are you ready to show off your skills?</p>
+    </div>
+    <div class="challenge-grid">
+
+      <div class="challenge-card writing-challenge">
+        <div class="challenge-icon">✏️</div>
+        <h3>Writing Challenge</h3>
+        <p>Write 4 sentences about your best friend</p>
+        <div class="challenge-input-group">
+          <input type="text" class="challenge-input" id="ch1" placeholder="Sentence 1..." />
+          <input type="text" class="challenge-input" id="ch2" placeholder="Sentence 2..." />
+          <input type="text" class="challenge-input" id="ch3" placeholder="Sentence 3..." />
+          <input type="text" class="challenge-input" id="ch4" placeholder="Sentence 4..." />
+        </div>
+        <button class="btn-challenge-submit" onclick="submitWritingChallenge()" id="submit-writing-challenge">✅ Submit!</button>
+        <div id="writing-challenge-result" class="feedback-box hidden"></div>
+      </div>
+
+      <div class="challenge-card drawing-challenge">
+        <div class="challenge-icon">🎨</div>
+        <h3>Drawing Challenge</h3>
+        <p>Draw your dream place and describe it</p>
+        <canvas id="challengeCanvas" width="400" height="250"></canvas>
+        <div class="challenge-canvas-tools">
+          <div class="color-palette small-palette">
+            <button class="color-btn sm" style="background:#ff6b6b" onclick="setChallengeColor('#ff6b6b')"></button>
+            <button class="color-btn sm" style="background:#ffd93d" onclick="setChallengeColor('#ffd93d')"></button>
+            <button class="color-btn sm" style="background:#6bcb77" onclick="setChallengeColor('#6bcb77')"></button>
+            <button class="color-btn sm" style="background:#4d96ff" onclick="setChallengeColor('#4d96ff')"></button>
+            <button class="color-btn sm" style="background:#c77dff" onclick="setChallengeColor('#c77dff')"></button>
+            <button class="color-btn sm" style="background:#333" onclick="setChallengeColor('#333')"></button>
+            <button class="color-btn sm" style="background:#fff;border:2px solid #ccc" onclick="setChallengeColor('#fff')"></button>
+          </div>
+          <button class="btn-clear sm" onclick="clearChallengeCanvas()" id="clear-challenge-canvas">🗑️</button>
+        </div>
+        <input type="text" class="challenge-input" id="dream-place-desc" placeholder="Describe your dream place..." />
+        <button class="btn-challenge-submit" onclick="submitDrawingChallenge()" id="submit-drawing-challenge">🎉 Share it!</button>
+        <div id="drawing-challenge-result" class="feedback-box hidden"></div>
+      </div>
+
+      <div class="challenge-card speaking-challenge">
+        <div class="challenge-icon">💬</div>
+        <h3>Speaking Challenge</h3>
+        <p>Talk for 30 seconds about your favorite thing</p>
+        <div class="challenge-speaking-area">
+          <button class="mic-btn challenge-mic" id="challenge-mic-btn" onclick="toggleChallengeSpeaking()">
+            <span id="challenge-mic-icon">🎤</span>
+            <span id="challenge-mic-label">Start!</span>
+          </button>
+          <div id="challenge-timer" class="speaking-timer hidden">
+            <div class="timer-ring challenge-timer-ring">
+              <span id="challenge-timer-count">30</span>
+            </div>
+          </div>
+          <div id="challenge-waves" class="speaking-waves hidden">
+            <span class="wave w1"></span>
+            <span class="wave w2"></span>
+            <span class="wave w3"></span>
+            <span class="wave w4"></span>
+            <span class="wave w5"></span>
+          </div>
+        </div>
+        <div id="challenge-speaking-result" class="feedback-box hidden"></div>
+      </div>
+
+    </div>
+    <button class="btn-back" onclick="showSection('menu')" id="back-from-challenge">🔙 Back to menu</button>
+  </section>
+
+  <!-- ===== FEEDBACK MODAL ===== -->
+  <div id="feedback-modal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="confetti-burst" id="confetti-burst"></div>
+      <div class="modal-emoji" id="modal-emoji">🎉</div>
+      <h2 class="modal-title" id="modal-title">Good job!</h2>
+      <p class="modal-subtitle" id="modal-subtitle">Keep up the great work!</p>
+      <div class="modal-stars">
+        <span class="mstar s1">⭐</span>
+        <span class="mstar s2">🌟</span>
+        <span class="mstar s3">⭐</span>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn try-again" id="modal-try-again" onclick="tryAgain()">🔄 Try again</button>
+        <button class="modal-btn next-activity" id="modal-next" onclick="nextActivity()">➡️ Next activity</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
