@@ -21,6 +21,7 @@
       <button class="nav-btn" onclick="showSection('menu')">🚀 Activities</button>
       <button class="nav-btn" onclick="showActivity('vocabulary')">🎮 Vocabulary</button>
       <button class="nav-btn" onclick="showSection('challenge')">🌟 Challenges</button>
+      <button class="nav-btn" onclick="showSection('planning')">📋 Planning</button>
     </div>
     <div class="nav-hamburger" onclick="toggleMobileNav()" id="hamburger">☰</div>
   </nav>
@@ -153,7 +154,15 @@
   </section>
 
   <!-- ===== SECTION 3: ACTIVITIES MENU ===== -->
-  <section id="menu" class="section">
+  <section id="menu" class="section magical-bg">
+    <div class="floating-decorations">
+      <span class="decor star-anim s1">⭐</span>
+      <span class="decor sparkle-anim sp1">✨</span>
+      <span class="decor star-anim s2">🌟</span>
+      <span class="decor sparkle-anim sp2">💫</span>
+      <span class="decor star-anim s3">⭐</span>
+      <span class="decor sparkle-anim sp3">✨</span>
+    </div>
     <div class="section-header">
       <h2>🚀 Grade 3 Activities</h2>
       <p>Choose your adventure!</p>
@@ -518,6 +527,79 @@
 
     </div>
     <button class="btn-back" onclick="showSection('menu')" id="back-from-challenge">🔙 Back to menu</button>
+  </section>
+
+  <!-- ===== SECTION 6: PLANNING ===== -->
+  <section id="planning" class="section">
+    <div class="section-header">
+      <h2>📋 Strategic Planning</h2>
+      <p>Pedagogical backbone of the English Adventures VLE</p>
+    </div>
+    
+    <div class="planning-container">
+      <!-- 1. Strategic Planning Form -->
+      <div class="planning-card">
+        <h3>1. Strategic Planning Form</h3>
+        
+        <div class="plan-item">
+          <h4>🎯 Audience</h4>
+          <p><strong>Population:</strong> Grade 3 students (approx. 8-9 years old).</p>
+          <p><strong>English Level:</strong> Beginner (A1/Pre-A1).</p>
+          <p><strong>Digital Literacy:</strong> Basic. Comfortable with clicking, dragging, and typing short words on a computer or tablet.</p>
+        </div>
+
+        <div class="plan-item">
+          <h4>📏 Scope</h4>
+          <p><strong>Unit:</strong> "My World & Friends"</p>
+          <p><strong>Topics:</strong> Animals, Colors, Basic Actions, Likes/Dislikes.</p>
+          <p><strong>Linguistic Skills:</strong></p>
+          <ul>
+            <li><strong>Listening:</strong> Understanding short sentences and instructions.</li>
+            <li><strong>Speaking:</strong> Pronouncing vocabulary words and producing short sentences about likes/dislikes.</li>
+            <li><strong>Reading:</strong> Reading short, simple texts and associating words with images.</li>
+            <li><strong>Writing:</strong> Writing simple sentences to describe animals and places.</li>
+          </ul>
+        </div>
+
+        <div class="plan-item">
+          <h4>🏆 Goals</h4>
+          <p><strong>General Objective:</strong> By the end of the module, students will be able to describe basic elements of their everyday world (animals, colors, preferences) using simple English vocabulary and grammatical structures across the four core language skills.</p>
+          <p><strong>Specific Objectives:</strong></p>
+          <ol>
+            <li>Students will correctly identify and match at least 8 out of 10 beginner vocabulary words with their corresponding images in the interactive game.</li>
+            <li>Students will write at least 3 simple, grammatically correct sentences describing a given animal using "It is..." and "It can..." structures.</li>
+            <li>Students will produce a spoken response of 15-30 seconds expressing their favorite animal and one reason why, with clear pronunciation of key vocabulary.</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- 2. Didactic Sequence -->
+      <div class="planning-card">
+        <h3>2. Didactic Sequence</h3>
+        
+        <div class="plan-item">
+          <h4>⏰ Session 01 Planning (45 min)</h4>
+          <p><strong>Opening (10 min):</strong> Welcome from characters (Misodis, Laura, Danny). Teacher introduces the topics (Animals, Colors, Likes) using the "Characters" section. Ice-breaker: Students interact with the characters' buttons.</p>
+          <p><strong>Development (25 min):</strong> Students move to the "Activities Menu". They rotate through the 4 core stations in pairs or individually:</p>
+          <ul>
+            <li><strong>Vocabulary Game:</strong> matching words and pictures.</li>
+            <li><strong>Reading:</strong> reading a short story and answering comprehension questions.</li>
+            <li><strong>Writing:</strong> guided sentences about an animal.</li>
+            <li><strong>Speaking:</strong> recording a short description of their favorite animal.</li>
+          </ul>
+          <p><strong>Closing (10 min):</strong> "Challenge Zone". Students attempt a quick challenge to synthesize what they learned. Teacher hands out digital or physical star rewards. Final cool-down and goodbyes.</p>
+        </div>
+
+        <div class="plan-item">
+          <h4>🗺️ Instructional Map</h4>
+          <p><strong>Step 1: Home Page 🏠</strong> ➔ Hooks the student with welcoming UI and animations.</p>
+          <p><strong>Step 2: Characters 👫</strong> ➔ Builds emotional connection and introduces activity types.</p>
+          <p><strong>Step 3: Activities Menu 🚀</strong> ➔ Hub for student autonomy. Allows choice between 5 learning stations (Reading, Writing, Speaking, Drawing, Vocabulary).</p>
+          <p><strong>Step 4: Individual Activities 🎮</strong> ➔ Core learning blocks with immediate feedback (Check buttons, modals).</p>
+          <p><strong>Step 5: Challenge Zone 🌟</strong> ➔ Formative assessment to consolidate learning in a fun way.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ===== FEEDBACK MODAL ===== -->
