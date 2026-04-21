@@ -30,6 +30,198 @@ const feedbackMessages = [
 let currentActivity = 'writing';
 const activityOrder = ['writing', 'drawing', 'reading', 'speaking', 'vocabulary'];
 
+// ===== AUDIO EFFECTS (SFX) =====
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+let audioCtx;
+
+function initAudio() {
+  if (!audioCtx) audioCtx = new AudioContext();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+
+function playPopSound() {
+  initAudio();
+  if (!audioCtx) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
+  gain.gain.setValueAtTime(0.5, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.1);
+}
+
+function playDingDongSound() {
+  initAudio();
+  if (!audioCtx) return;
+  const playTone = (freq, startTime, duration) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(0.3, startTime + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + duration);
+  };
+  const now = audioCtx.currentTime;
+  playTone(523.25, now, 0.4); // C5
+  playTone(659.25, now + 0.2, 0.6); // E5
+}
+
+function playErrorSound() {
+  initAudio();
+  if(!audioCtx) return;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = 'sawtooth';
+  osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+  osc.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.3);
+  gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.3);
+}
+
+function playActivitySound(activity) {
+  initAudio();
+  if (!audioCtx) return;
+  const playTone = (freq, type, startTime, duration, vol=0.2) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(vol, startTime + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(startTime);
+    osc.stop(startTime + duration);
+  };
+
+  const now = audioCtx.currentTime;
+  if (activity === 'writing') {
+    playTone(600, 'square', now, 0.1, 0.1);
+    playTone(800, 'square', now + 0.15, 0.1, 0.1);
+  } else if (activity === 'drawing') {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(300, now);
+    osc.frequency.linearRampToValueAtTime(600, now + 0.3);
+    gain.gain.setValueAtTime(0.2, now);
+    gain.gain.linearRampToValueAtTime(0, now + 0.3);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + 0.3);
+  } else if (activity === 'reading') {
+    playTone(400, 'triangle', now, 0.2);
+    playTone(500, 'triangle', now + 0.05, 0.2);
+    playTone(600, 'triangle', now + 0.1, 0.2);
+  } else if (activity === 'speaking') {
+    playTone(300, 'sine', now, 0.15);
+    playTone(450, 'sine', now + 0.2, 0.15);
+  } else if (activity === 'vocabulary') {
+    playTone(500, 'square', now, 0.1, 0.1);
+    playTone(400, 'square', now + 0.1, 0.1, 0.1);
+    playTone(600, 'square', now + 0.2, 0.1, 0.1);
+  } else if (activity === 'challenge') {
+    playTone(440, 'sawtooth', now, 0.4, 0.1);
+    playTone(554.37, 'sawtooth', now, 0.4, 0.1);
+    playTone(659.25, 'sawtooth', now, 0.4, 0.1);
+  }
+}
+
+// ===== FOXY THE FOX & PERSISTENCE =====
+let foxyStarsCompleted = new Set();
+const foxyMessages = {
+  'home': "Hi! I’m Foxy! Let’s explore English together!",
+  'characters': "These are my friends! They will help us learn!",
+  'menu': "Wow! So many adventures! Where do we go first?",
+  'activity-writing': "Let's write something together! Time to create ideas!",
+  'activity-drawing': "Show me your creativity! I love drawing!",
+  'activity-reading': "Let's discover a story! Books are magical!",
+  'activity-speaking': "Don't be shy! You can do it! I want to hear you!",
+  'activity-vocabulary': "Let's find the correct word! Match them up!",
+  'challenge': "Wow! This is a big challenge! You've got this!",
+  'planning': "This is the instructional map of our journey!"
+};
+
+function saveProgress() {
+  localStorage.setItem('foxyProgress', JSON.stringify(Array.from(foxyStarsCompleted)));
+}
+
+function loadProgress() {
+  const saved = localStorage.getItem('foxyProgress');
+  if (saved) {
+    const arr = JSON.parse(saved);
+    arr.forEach(id => foxyStarsCompleted.add(id));
+    
+    let foxyStars = foxyStarsCompleted.size;
+    const countEl = document.getElementById('foxy-stars-count');
+    if (countEl) countEl.textContent = foxyStars;
+    
+    if (foxyStars === 6) {
+       document.getElementById('nav-cert-btn')?.classList.remove('hidden');
+    }
+  }
+}
+
+function awardFoxyStar(activityId) {
+  if (!foxyStarsCompleted.has(activityId)) {
+    foxyStarsCompleted.add(activityId);
+    saveProgress();
+    playDingDongSound();
+    
+    let foxyStars = foxyStarsCompleted.size;
+    const countEl = document.getElementById('foxy-stars-count');
+    if (countEl) countEl.textContent = foxyStars;
+    
+    const foxyEl = document.getElementById('foxy-progress');
+    if (foxyEl) {
+      foxyEl.style.transform = 'scale(1.15)';
+      foxyEl.style.transition = 'transform 0.3s';
+      setTimeout(() => { foxyEl.style.transform = 'scale(1)'; }, 300);
+    }
+    
+    if (foxyStars === 6) {
+       document.getElementById('nav-cert-btn')?.classList.remove('hidden');
+       setTimeout(() => {
+         updateFoxyMessage("Wow! You got all 6 stars! You completed the journey! 🎉");
+         document.getElementById('certificate-modal')?.classList.remove('hidden');
+       }, 1500);
+    }
+  }
+}
+
+function updateFoxyMessage(text) {
+  const guide = document.getElementById('foxy-floating-guide');
+  const guideText = document.getElementById('foxy-guide-text');
+  if (!guide || !guideText) return;
+  
+  guide.classList.remove('visible');
+  setTimeout(() => {
+    guideText.textContent = text;
+    guide.classList.add('visible');
+  }, 400);
+}
+
+// Ensure first message is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => updateFoxyMessage(foxyMessages['home']), 500);
+});
+
 // ===== SECTION NAVIGATION =====
 function showSection(id) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -37,12 +229,15 @@ function showSection(id) {
   if (target) {
     target.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (foxyMessages[id]) updateFoxyMessage(foxyMessages[id]);
+    if (id === 'challenge') playActivitySound('challenge');
   }
 }
 
 function showActivity(type) {
   currentActivity = type;
   showSection('activity-' + type);
+  playActivitySound(type);
 }
 
 // ===== MOBILE NAV =====
@@ -60,14 +255,28 @@ function toggleMobileNav() {
 }
 
 // ===== CHARACTER INTERACTIONS =====
-function helloMisodis() {
-  const response = document.getElementById('misodis-response');
+function helloLaura() {
+  const response = document.getElementById('laura-hello-response');
   response.classList.remove('hidden');
   response.style.animation = 'fadeInUp 0.4s ease';
-  const btn = document.getElementById('hello-btn');
-  btn.textContent = '💜 Nice to meet you!';
-  btn.disabled = true;
-  btn.style.opacity = '0.7';
+  const btn = document.querySelector('.laura-btn');
+  if(btn) {
+    btn.textContent = '💜 Nice to meet you!';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+  }
+}
+
+function helloDanny() {
+  const response = document.getElementById('danny-hello-response');
+  response.classList.remove('hidden');
+  response.style.animation = 'fadeInUp 0.4s ease';
+  const btn = document.querySelector('.daniel-btn');
+  if(btn) {
+    btn.textContent = '💜 Nice to meet you!';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+  }
 }
 
 function selectLike(btn, message) {
@@ -97,6 +306,7 @@ function checkWriting() {
     feedback.classList.remove('hidden');
     feedback.classList.add('error');
     feedback.innerHTML = '✏️ Please write all 3 sentences before checking!';
+    playErrorSound();
     return;
   }
 
@@ -105,9 +315,11 @@ function checkWriting() {
   feedback.classList.remove('hidden', 'error');
   if (sentenceCount === 3) {
     feedback.innerHTML = '🎉 Excellent! Your 3 sentences look great! Well done!';
+    awardFoxyStar('writing');
     setTimeout(() => showFeedbackModal('writing'), 600);
   } else {
     feedback.innerHTML = '🌟 Good try! Try to write longer sentences with more details.';
+    playErrorSound();
   }
 }
 
@@ -304,6 +516,7 @@ function checkDrawing() {
 
   feedback.classList.remove('hidden', 'error');
   feedback.innerHTML = '🎨 Wonderful! Your drawing and description are amazing!';
+  awardFoxyStar('drawing');
   setTimeout(() => showFeedbackModal('drawing'), 600);
 }
 
@@ -311,43 +524,46 @@ function checkDrawing() {
 const correctAnswers = { 1: 'b', 2: 'b', 3: 'a' };
 let readingAnswers = {};
 
-function checkAnswer(qNum, answer) {
-  if (readingAnswers[qNum]) return; // already answered
-
-  readingAnswers[qNum] = answer;
-  const correct = correctAnswers[qNum];
-  const resultEl = document.getElementById('q' + qNum + '-result');
-  const allBtns = document.querySelectorAll('#q' + qNum + '-block .answer-btn');
-
-  allBtns.forEach(btn => {
-    btn.disabled = true;
+function selectReadingAnswer(qNum, element, isCorrect) {
+  playPopSound();
+  const block = document.getElementById('q' + qNum + '-block');
+  const btns = block.querySelectorAll('.answer-btn');
+  // Deselect all
+  btns.forEach(b => {
+    b.classList.remove('correct', 'wrong');
+    b.disabled = true;
   });
 
-  if (answer === correct) {
-    document.getElementById('q' + qNum + answer).classList.add('correct');
+  readingAnswers[qNum] = element.dataset.answer;
+  if (isCorrect) {
+    element.classList.add('correct');
+    const resultEl = document.getElementById('q' + qNum + '-result');
     resultEl.classList.remove('hidden');
     resultEl.innerHTML = '✅ Correct! Well done!';
     resultEl.style.color = '#6ee7b7';
   } else {
-    document.getElementById('q' + qNum + answer).classList.add('wrong');
-    document.getElementById('q' + qNum + correct).classList.add('correct');
+    element.classList.add('wrong');
+    document.getElementById('q' + qNum + correctAnswers[qNum]).classList.add('correct');
+    const resultEl = document.getElementById('q' + qNum + '-result');
     resultEl.classList.remove('hidden');
     resultEl.innerHTML = '❌ Not quite! The correct answer is highlighted.';
     resultEl.style.color = '#fca5a5';
   }
-
-  // Check if all answered
-  if (Object.keys(readingAnswers).length === 3) {
-    setTimeout(showReadingScore, 500);
-  }
 }
 
-function showReadingScore() {
+function checkReading() {
+  const scoreEl = document.getElementById('reading-score');
+  scoreEl.classList.remove('hidden', 'error');
+
+  if (Object.keys(readingAnswers).length < 3) {
+    scoreEl.classList.add('error');
+    scoreEl.innerHTML = '⚠️ Please answer all 3 questions first!';
+    playErrorSound();
+    return;
+  }
+
   const score = Object.entries(readingAnswers)
     .filter(([q, a]) => correctAnswers[q] === a).length;
-
-  const scoreEl = document.getElementById('reading-score');
-  scoreEl.classList.remove('hidden');
 
   const messages = [
     { score: 3, msg: '🏆 Perfect score! 3/3 — You\'re a reading star!' },
@@ -358,6 +574,13 @@ function showReadingScore() {
 
   const entry = messages.find(m => m.score === score) || messages[3];
   scoreEl.innerHTML = entry.msg;
+
+  if (score === 3) {
+    playActivitySound();
+    awardFoxyStar('reading');
+  } else {
+    playErrorSound();
+  }
 
   setTimeout(() => showFeedbackModal('reading'), 800);
 }
@@ -433,15 +656,20 @@ function stopSpeaking(completed = false) {
 
   feedback.classList.remove('hidden', 'error');
   if (completed) {
-    feedback.innerHTML = '🎉 Amazing! You spoke for 30 seconds! Great job!';
-    setTimeout(() => showFeedbackModal('speaking'), 600);
+    feedback.innerHTML = '🎉 Wow! You spoke clearly and confidently! Great job!';
+    playActivitySound();
+    awardFoxyStar('speaking');
+    setTimeout(() => showFeedbackModal('speaking'), 800);
   } else {
-    feedback.innerHTML = '🎤 Practice stopped. Try again to speak for 30 seconds!';
+    feedback.classList.add('error');
+    feedback.innerHTML = '❌ Recording stopped. Try to speak for a bit longer!';
+    playErrorSound();
   }
 }
 
 // ===== ANIMAL SELECTOR (SPEAKING) =====
 function selectAnimal(emoji, name) {
+  playPopSound();
   document.querySelectorAll('.animal-opt').forEach(b => b.classList.remove('selected'));
   event.target.classList.add('selected');
   const display = document.getElementById('selected-animal-display');
@@ -471,6 +699,7 @@ function submitWritingChallenge() {
   result.classList.remove('hidden', 'error');
   if (filled === 4) {
     result.innerHTML = '🏆 CHALLENGE COMPLETE! All 4 sentences done! You\'re amazing!';
+    awardFoxyStar('challenge');
     showFeedbackModal('challenge');
   } else {
     result.innerHTML = `🌟 Great start! You wrote ${filled}/4 sentences. Try to finish all 4!`;
@@ -696,7 +925,8 @@ function loadVocabRound() {
 
 function selectVocabWord(wordIdx) {
   if (confirmedPairs.some(p => p.wordIdx === wordIdx)) return; // already matched
-
+  playPopSound();
+  
   // Deselect previous
   document.querySelectorAll('.vocab-word-tile').forEach(b => b.classList.remove('selected'));
   selectedWord = wordIdx;
@@ -708,6 +938,7 @@ function selectVocabWord(wordIdx) {
 
 function selectVocabImage(pairIdx, displayIdx) {
   if (confirmedPairs.some(p => p.imageIdx === pairIdx)) return; // already matched
+  playPopSound();
 
   // Deselect previous
   document.querySelectorAll('.vocab-image-tile').forEach(b => b.classList.remove('selected'));
@@ -724,6 +955,7 @@ function attemptVocabMatch() {
 
   if (selectedWord === selectedImage) {
     // Correct!
+    playPopSound();
     confirmedPairs.push({ wordIdx: selectedWord, imageIdx: selectedImage });
     wordTile.classList.remove('selected');
     wordTile.classList.add('matched');
@@ -736,6 +968,7 @@ function attemptVocabMatch() {
     imageTile.appendChild(check);
   } else {
     // Wrong
+    playErrorSound();
     wordTile.classList.add('wrong-match');
     imageTile.classList.add('wrong-match');
     setTimeout(() => {
@@ -774,6 +1007,7 @@ function checkVocabMatches(autoChecked = false) {
     result.innerHTML = `🏆 Perfect! ${correct}/${total} — You matched all the words! Amazing!`;
     document.getElementById('vocab-check-btn').style.display = 'none';
     document.getElementById('vocab-next-btn').style.display = '';
+    awardFoxyStar('vocabulary');
     setTimeout(() => {
       vocabLevel++;
       showFeedbackModal('vocabulary');
@@ -783,6 +1017,7 @@ function checkVocabMatches(autoChecked = false) {
     document.getElementById('vocab-check-btn').style.display = 'none';
     document.getElementById('vocab-next-btn').style.display = '';
   } else {
+    playErrorSound();
     result.innerHTML = `💪 You got ${correct}/${total}. Try again — you can do it!`;
     result.classList.add('error');
   }
@@ -826,6 +1061,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Init vocabulary game
   loadVocabRound();
+  
+  // Load saved progress
+  loadProgress();
 
   // Keyboard shortcut: Escape closes modal
   document.addEventListener('keydown', (e) => {
@@ -843,3 +1081,167 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log('🌞 Grade 3 Learning App Ready! Vocabulary Game loaded.');
 });
+
+// ===== HELP FORM =====
+function openContactForm(type) {
+  const container = document.getElementById('help-form-container');
+  const buttons = document.getElementById('help-buttons');
+  const title = document.getElementById('help-form-title');
+  const textarea = document.getElementById('help-textarea');
+  const success = document.getElementById('help-success');
+  
+  if(success) success.classList.add('hidden');
+  if(textarea) textarea.value = '';
+  
+  if (type === 'teacher') title.textContent = '👩‍🏫 Ask Teacher Laura';
+  else if (type === 'question') title.textContent = '❓ Ask Teacher Danny';
+  else if (type === 'suggestion') title.textContent = '💌 Suggestions Box';
+  
+  buttons.classList.add('hidden');
+  container.classList.remove('hidden');
+}
+
+function closeContactForm() {
+  document.getElementById('help-form-container').classList.add('hidden');
+  document.getElementById('help-buttons').classList.remove('hidden');
+}
+
+function sendContactForm() {
+  const textarea = document.getElementById('help-textarea');
+  if (!textarea.value.trim()) {
+    alert("Please write something first!");
+    return;
+  }
+  
+  document.getElementById('help-success').classList.remove('hidden');
+  textarea.value = '';
+  
+  setTimeout(() => {
+    closeContactForm();
+    document.getElementById('help-success').classList.add('hidden');
+  }, 2500);
+}
+
+// ===== CERTIFICATE =====
+function showCertificateModal() {
+  const modal = document.getElementById('certificate-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    const foxyGuide = document.getElementById('foxy-floating-guide');
+    if (foxyGuide) foxyGuide.classList.remove('visible');
+    playPopSound();
+  }
+}
+function printCertificate() {
+  window.print();
+}
+function closeCertificate() {
+  document.getElementById('certificate-modal').classList.add('hidden');
+}
+
+// ===== MISSING STARS CHECK =====
+function checkMissingStars() {
+  const allActivities = ['writing', 'drawing', 'reading', 'speaking', 'vocabulary', 'challenge'];
+  const missing = allActivities.filter(act => !foxyStarsCompleted.has(act));
+  
+  if (missing.length === 0) {
+    updateFoxyMessage("You have all the stars! Time to get your Certificate! 🏆");
+  } else {
+    // translate activity keys to nice words
+    const niceNames = {
+      'writing': 'Writing ✍️',
+      'drawing': 'Drawing 🎨',
+      'reading': 'Reading 📖',
+      'speaking': 'Speaking 💬',
+      'vocabulary': 'Vocabulary 🎮',
+      'challenge': 'Final Challenge 🌟'
+    };
+    const missingNames = missing.map(act => niceNames[act]).join(', ');
+    updateFoxyMessage(`You are missing: ${missingNames}. Let's go get them!`);
+  }
+}
+
+// ===== THEME TOGGLE =====
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-btn');
+  const current = html.getAttribute('data-theme');
+  
+  if (current === 'light') {
+    html.removeAttribute('data-theme');
+    btn.textContent = '☀️ Day Mode';
+    btn.style.color = '#fcd34d';
+    btn.style.background = 'rgba(255,255,255,0.1)';
+  } else {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '🌙 Night Mode';
+    btn.style.color = '#1e293b';
+    btn.style.background = 'rgba(0,0,0,0.1)';
+  }
+  playPopSound();
+}
+
+// ===== EASTER EGGS =====
+let foxyClickCount = 0;
+let foxyTimer = null;
+
+function foxyEasterEgg() {
+  foxyClickCount++;
+  const avatar = document.getElementById('foxy-avatar-egg');
+  
+  // Clear timer if clicking fast
+  if (foxyTimer) clearTimeout(foxyTimer);
+  
+  if (foxyClickCount >= 5) {
+    // TRIGGER SPIN!
+    avatar.classList.add('foxy-spin');
+    playDingDongSound();
+    updateFoxyMessage("Wheeeee! I'm spinning! Hahaha! 🦊✨");
+    
+    setTimeout(() => {
+      avatar.classList.remove('foxy-spin');
+      foxyClickCount = 0;
+    }, 1000);
+  } else {
+    // Reset if no clicks for 2 seconds
+    foxyTimer = setTimeout(() => {
+      foxyClickCount = 0;
+    }, 2000);
+    
+    // Tiny bounce on click
+    avatar.style.transform = 'scale(1.2)';
+    setTimeout(() => { avatar.style.transform = ''; }, 150);
+    playPopSound();
+  }
+}
+
+function starEasterEgg(el) {
+  playPopSound();
+  el.classList.add('star-pop');
+  
+  // Create tiny confetti effect
+  const rect = el.getBoundingClientRect();
+  for (let i = 0; i < 5; i++) {
+    const p = document.createElement('div');
+    p.textContent = ['✨','⭐','🌟','🎈'][Math.floor(Math.random()*4)];
+    p.style.position = 'fixed';
+    p.style.left = rect.left + rect.width/2 + 'px';
+    p.style.top = rect.top + rect.height/2 + 'px';
+    p.style.pointerEvents = 'none';
+    p.style.zIndex = '2000';
+    p.style.fontSize = '1.2rem';
+    p.style.transition = 'all 0.8s ease-out';
+    document.body.appendChild(p);
+    
+    setTimeout(() => {
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 50 + Math.random() * 50;
+      p.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px) rotate(${Math.random()*360}deg)`;
+      p.style.opacity = '0';
+    }, 10);
+    
+    setTimeout(() => p.remove(), 1000);
+  }
+  
+  setTimeout(() => { el.classList.remove('star-pop'); }, 400);
+}

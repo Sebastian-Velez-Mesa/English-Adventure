@@ -22,6 +22,11 @@
       <button class="nav-btn" onclick="showActivity('vocabulary')">🎮 Vocabulary</button>
       <button class="nav-btn" onclick="showSection('challenge')">🌟 Challenges</button>
       <button class="nav-btn" onclick="showSection('planning')">📋 Planning</button>
+      <button class="nav-btn hidden" id="nav-cert-btn" style="color:#fb923c;font-weight:900;" onclick="showCertificateModal()">🏆 Certificate</button>
+      <button class="nav-btn theme-toggle" onclick="toggleTheme()" id="theme-btn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 0.4rem 1rem; margin-left: 0.5rem; font-weight: 800; cursor: pointer; transition: all 0.3s; color: #fcd34d;">☀️ Day Mode</button>
+    </div>
+    <div class="foxy-progress" id="foxy-progress" onclick="checkMissingStars()">
+      <span class="foxy-emoji">🦊</span> <span class="foxy-nav-text">Foxy's Journey:</span> <span id="foxy-stars-count">0</span>/6 ⭐
     </div>
     <div class="nav-hamburger" onclick="toggleMobileNav()" id="hamburger">☰</div>
   </nav>
@@ -94,23 +99,6 @@
     </div>
     <div class="characters-grid">
 
-      <!-- MISODIS -->
-      <div class="character-card teacher-card">
-        <div class="character-avatar teacher-avatar">
-          <img src="misodis.png" alt="Teacher Misodis" class="char-img" />
-        </div>
-        <div class="character-badge teacher-badge">Teacher</div>
-        <h3 class="character-name">MISODIS</h3>
-        <p class="character-subtitle">Meet your teacher!</p>
-        <div class="speech-bubble teacher-bubble">
-          "I love teaching!"
-        </div>
-        <button class="btn-character teacher-btn" id="hello-btn" onclick="helloMisodis()">👋 Hello!</button>
-        <div id="misodis-response" class="character-response hidden">
-          ✨ Hello, dear student! Ready to learn? 🌟
-        </div>
-      </div>
-
       <!-- LAURA -->
       <div class="character-card laura-card">
         <div class="character-avatar laura-avatar">
@@ -118,7 +106,8 @@
         </div>
         <div class="character-badge laura-badge">Teacher</div>
         <h3 class="character-name">LAURA</h3>
-        <p class="character-subtitle">Let's have fun!</p>
+        <p class="character-subtitle">Meet your teacher!</p>
+        <div class="speech-bubble">"I love teaching and having fun!"</div>
         <div class="activity-box">
           <p class="activity-question">🤔 What do you like?</p>
           <div class="like-options">
@@ -128,6 +117,8 @@
           </div>
           <div id="laura-response" class="laura-response hidden"></div>
         </div>
+        <button class="btn-character laura-btn" style="margin-top:0.8rem; background: linear-gradient(135deg, #7c3aed, #a855f7); color: white;" onclick="helloLaura()">👋 Hello Laura!</button>
+        <div id="laura-hello-response" class="character-response hidden" style="margin-top:0.5rem">✨ Hello, dear student! Ready to learn? 🌟</div>
       </div>
 
       <!-- DANNY -->
@@ -144,6 +135,8 @@
           <button class="daniel-btn" id="write-btn" onclick="danielActivity('✏️ Excellent writing!')">✏️ Write a sentence</button>
         </div>
         <div id="daniel-response" class="daniel-response hidden"></div>
+        <button class="btn-character daniel-btn" style="margin-top:0.8rem; background: linear-gradient(135deg, #10b981, #059669); color: white;" onclick="helloDanny()">👋 Hello Danny!</button>
+        <div id="danny-hello-response" class="character-response hidden" style="margin-top:0.5rem">✨ Hey there! Let's get started! 🚀</div>
       </div>
 
     </div>
@@ -156,12 +149,12 @@
   <!-- ===== SECTION 3: ACTIVITIES MENU ===== -->
   <section id="menu" class="section magical-bg">
     <div class="floating-decorations">
-      <span class="decor star-anim s1">⭐</span>
-      <span class="decor sparkle-anim sp1">✨</span>
-      <span class="decor star-anim s2">🌟</span>
-      <span class="decor sparkle-anim sp2">💫</span>
-      <span class="decor star-anim s3">⭐</span>
-      <span class="decor sparkle-anim sp3">✨</span>
+      <span class="decor star-anim s1" onclick="starEasterEgg(this)">⭐</span>
+      <span class="decor sparkle-anim sp1" onclick="starEasterEgg(this)">✨</span>
+      <span class="decor star-anim s2" onclick="starEasterEgg(this)">🌟</span>
+      <span class="decor sparkle-anim sp2" onclick="starEasterEgg(this)">💫</span>
+      <span class="decor star-anim s3" onclick="starEasterEgg(this)">⭐</span>
+      <span class="decor sparkle-anim sp3" onclick="starEasterEgg(this)">✨</span>
     </div>
     <div class="section-header">
       <h2>🚀 Grade 3 Activities</h2>
@@ -532,75 +525,193 @@
   <!-- ===== SECTION 6: PLANNING ===== -->
   <section id="planning" class="section">
     <div class="section-header">
-      <h2>📋 Strategic Planning</h2>
+      <h2>📋 Instructional Map</h2>
       <p>Pedagogical backbone of the English Adventures VLE</p>
     </div>
     
     <div class="planning-container">
-      <!-- 1. Strategic Planning Form -->
-      <div class="planning-card">
-        <h3>1. Strategic Planning Form</h3>
+      
+      <!-- Section 1: What is an Instructional Map? -->
+      <div class="planning-card kid-friendly-card">
+        <div class="foxy-tip-bubble">
+          🦊 <strong>Foxy says:</strong> A map helps us find the way!
+        </div>
+        <h3>What is an Instructional Map?</h3>
+        <p class="kid-intro">Imagine you go to a new city without a map or GPS. You would feel lost, right? <strong>An instructional map is like a GPS for your learning journey.</strong></p>
+        <p class="kid-intro">It helps you understand what you will learn, what you need to do, and how you will complete your activities!</p>
         
-        <div class="plan-item">
-          <h4>🎯 Audience</h4>
-          <p><strong>Population:</strong> Grade 3 students (approx. 8-9 years old).</p>
-          <p><strong>English Level:</strong> Beginner (A1/Pre-A1).</p>
-          <p><strong>Digital Literacy:</strong> Basic. Comfortable with clicking, dragging, and typing short words on a computer or tablet.</p>
-        </div>
+        <div class="kid-blocks-grid">
+          <div class="kid-block obj-block">
+            <span class="block-icon">🎯</span>
+            <h4>Objectives</h4>
+            <p><strong>Where are we going?</strong></p>
+            <ul>
+              <li>Learn to write simple sentences</li>
+              <li>Practice speaking and reading</li>
+            </ul>
+          </div>
+          
+          <div class="kid-block act-block">
+            <span class="block-icon">🚀</span>
+            <h4>Activities</h4>
+            <p><strong>What will we do?</strong></p>
+            <div class="icons-list">
+              <span>✏️ Writing</span>
+              <span>🎨 Drawing</span>
+              <span>📖 Reading</span>
+              <span>💬 Speaking</span>
+              <span>🎮 Vocabulary game</span>
+            </div>
+          </div>
 
-        <div class="plan-item">
-          <h4>📏 Scope</h4>
-          <p><strong>Unit:</strong> "My World & Friends"</p>
-          <p><strong>Topics:</strong> Animals, Colors, Basic Actions, Likes/Dislikes.</p>
-          <p><strong>Linguistic Skills:</strong></p>
-          <ul>
-            <li><strong>Listening:</strong> Understanding short sentences and instructions.</li>
-            <li><strong>Speaking:</strong> Pronouncing vocabulary words and producing short sentences about likes/dislikes.</li>
-            <li><strong>Reading:</strong> Reading short, simple texts and associating words with images.</li>
-            <li><strong>Writing:</strong> Writing simple sentences to describe animals and places.</li>
-          </ul>
-        </div>
+          <div class="kid-block eval-block">
+            <span class="block-icon">🏆</span>
+            <h4>Evaluation</h4>
+            <p><strong>How will you be evaluated?</strong></p>
+            <ul>
+              <li>Completing activities</li>
+              <li>Participation</li>
+              <li>Final challenge</li>
+            </ul>
+          </div>
 
-        <div class="plan-item">
-          <h4>🏆 Goals</h4>
-          <p><strong>General Objective:</strong> By the end of the module, students will be able to describe basic elements of their everyday world (animals, colors, preferences) using simple English vocabulary and grammatical structures across the four core language skills.</p>
-          <p><strong>Specific Objectives:</strong></p>
-          <ol>
-            <li>Students will correctly identify and match at least 8 out of 10 beginner vocabulary words with their corresponding images in the interactive game.</li>
-            <li>Students will write at least 3 simple, grammatically correct sentences describing a given animal using "It is..." and "It can..." structures.</li>
-            <li>Students will produce a spoken response of 15-30 seconds expressing their favorite animal and one reason why, with clear pronunciation of key vocabulary.</li>
-          </ol>
+          <div class="kid-block time-block">
+            <span class="block-icon">⏰</span>
+            <h4>Timeline</h4>
+            <p><strong>When?</strong></p>
+            <ul class="timeline-list">
+              <li><strong>Week 1:</strong> Writing &amp; Vocabulary</li>
+              <li><strong>Week 2:</strong> Reading &amp; Drawing</li>
+              <li><strong>Week 3:</strong> Speaking &amp; Challenge</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <!-- 2. Didactic Sequence -->
-      <div class="planning-card">
-        <h3>2. Didactic Sequence</h3>
-        
-        <div class="plan-item">
-          <h4>⏰ Session 01 Planning (45 min)</h4>
-          <p><strong>Opening (10 min):</strong> Welcome from characters (Misodis, Laura, Danny). Teacher introduces the topics (Animals, Colors, Likes) using the "Characters" section. Ice-breaker: Students interact with the characters' buttons.</p>
-          <p><strong>Development (25 min):</strong> Students move to the "Activities Menu". They rotate through the 4 core stations in pairs or individually:</p>
-          <ul>
-            <li><strong>Vocabulary Game:</strong> matching words and pictures.</li>
-            <li><strong>Reading:</strong> reading a short story and answering comprehension questions.</li>
-            <li><strong>Writing:</strong> guided sentences about an animal.</li>
-            <li><strong>Speaking:</strong> recording a short description of their favorite animal.</li>
-          </ul>
-          <p><strong>Closing (10 min):</strong> "Challenge Zone". Students attempt a quick challenge to synthesize what they learned. Teacher hands out digital or physical star rewards. Final cool-down and goodbyes.</p>
+      <!-- Section 2: EXAMPLE SECTION -->
+      <div class="planning-card kid-friendly-card">
+        <div class="foxy-tip-bubble">
+          🦊 <strong>Foxy says:</strong> Look at our weekly plan!
         </div>
-
-        <div class="plan-item">
-          <h4>🗺️ Instructional Map</h4>
-          <p><strong>Step 1: Home Page 🏠</strong> ➔ Hooks the student with welcoming UI and animations.</p>
-          <p><strong>Step 2: Characters 👫</strong> ➔ Builds emotional connection and introduces activity types.</p>
-          <p><strong>Step 3: Activities Menu 🚀</strong> ➔ Hub for student autonomy. Allows choice between 5 learning stations (Reading, Writing, Speaking, Drawing, Vocabulary).</p>
-          <p><strong>Step 4: Individual Activities 🎮</strong> ➔ Core learning blocks with immediate feedback (Check buttons, modals).</p>
-          <p><strong>Step 5: Challenge Zone 🌟</strong> ➔ Formative assessment to consolidate learning in a fun way.</p>
+        <h3>Example: Our Learning Weeks</h3>
+        
+        <div class="weekly-example-grid">
+          <div class="week-card">
+            <div class="week-title">Week 1</div>
+            <p><strong>Topic:</strong> "Animals" 🐘</p>
+            <div class="week-section">
+              <strong>Activities:</strong>
+              <ul>
+                <li>Write sentences</li>
+                <li>Vocabulary game</li>
+              </ul>
+            </div>
+            <div class="week-section">
+              <strong>Evaluation:</strong>
+              <p>✅ Complete activity</p>
+            </div>
+          </div>
+          
+          <div class="week-card">
+            <div class="week-title">Week 2</div>
+            <p><strong>Topic:</strong> "My world" 🌎</p>
+            <div class="week-section">
+              <strong>Activities:</strong>
+              <ul>
+                <li>Drawing</li>
+                <li>Reading</li>
+              </ul>
+            </div>
+            <div class="week-section">
+              <strong>Evaluation:</strong>
+              <p>✅ Answer questions</p>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Section 3: NAVIGATION GUIDE -->
+      <div class="planning-card kid-friendly-card">
+        <h3>How to use this page</h3>
+        <p class="kid-intro">Follow these steps to learn English!</p>
+        <div class="steps-container">
+          <div>
+            <div class="step-circle">1</div>
+            <div class="step-text"><strong>Start</strong> at the Home page</div>
+          </div>
+          <div>
+            <div class="step-circle">2</div>
+            <div class="step-text"><strong>Follow</strong> the learning path step by step (do not skip)</div>
+          </div>
+          <div>
+            <div class="step-circle">3</div>
+            <div class="step-text"><strong>First learn</strong> (content)</div>
+          </div>
+          <div>
+            <div class="step-circle">4</div>
+            <div class="step-text"><strong>Then practice</strong> (activities)</div>
+          </div>
+          <div>
+            <div class="step-circle">5</div>
+            <div class="step-text"><strong>Finally create</strong> (your work)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4 & 5: COMMUNICATION & CALENDAR -->
+      <div class="two-columns">
+        <div class="planning-card kid-friendly-card col-card">
+          <div class="foxy-tip-bubble">
+            🦊 <strong>Foxy says:</strong> I am here to help!
+          </div>
+          <h3>Need help?</h3>
+          <div class="contact-emails">
+            <p><strong>👩‍🏫 Teacher Laura:</strong> <a href="mailto:teacherlaurapro@amigo.edu.co">teacherlaurapro@amigo.edu.co</a></p>
+            <p><strong>🧸 Teacher Danny:</strong> <a href="mailto:dannyteachernub@amigo.edu.co">dannyteachernub@amigo.edu.co</a></p>
+          </div>
+
+          <div class="help-action-area">
+            <div class="help-buttons" id="help-buttons">
+              <button class="btn-help" onclick="openContactForm('teacher')">👩‍🏫 Ask your teacher</button>
+              <button class="btn-help" onclick="openContactForm('question')">❓ Ask a question</button>
+              <button class="btn-help comments-btn" onclick="openContactForm('suggestion')">💌 Suggestions Box</button>
+            </div>
+
+            <div class="help-form-container hidden" id="help-form-container">
+              <h4 id="help-form-title">Send a message</h4>
+              <textarea id="help-textarea" rows="3" placeholder="Write your message here..."></textarea>
+              <div class="help-form-actions">
+                <button class="btn-cancel" onclick="closeContactForm()">Cancel</button>
+                <button class="btn-send" onclick="sendContactForm()">Send 🚀</button>
+              </div>
+              <div id="help-success" class="hidden">Message sent successfully! 🌟</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="planning-card kid-friendly-card col-card">
+          <h3>Calendar &amp; Progress</h3>
+          <div class="progress-box">
+            <div class="prog-item">
+              <span>Week 1 limit: <strong>Friday</strong></span>
+              <span class="status-badge ✅">Completed</span>
+            </div>
+            <div class="prog-item">
+              <span>Week 2 limit: <strong>Next Friday</strong></span>
+              <span class="status-badge ❌">Not completed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
+
+  <!-- ===== FOXY FLOATING GUIDE ===== -->
+  <div class="foxy-floating-guide" id="foxy-floating-guide">
+    <div class="foxy-guide-avatar bounce" id="foxy-avatar-egg" onclick="foxyEasterEgg()">🦊</div>
+    <div class="foxy-guide-text" id="foxy-guide-text">Hi! I’m Foxy! Let’s explore English together!</div>
+  </div>
 
   <!-- ===== FEEDBACK MODAL ===== -->
   <div id="feedback-modal" class="modal-overlay hidden">
@@ -617,6 +728,37 @@
       <div class="modal-actions">
         <button class="modal-btn try-again" id="modal-try-again" onclick="tryAgain()">🔄 Try again</button>
         <button class="modal-btn next-activity" id="modal-next" onclick="nextActivity()">➡️ Next activity</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CERTIFICATE MODAL ===== -->
+  <div id="certificate-modal" class="modal-overlay hidden hide-on-print">
+    <div class="modal-box cert-box" id="print-area">
+      <div class="cert-border">
+        <h2>🏆 Certificate of Achievement 🏆</h2>
+        <p>This certifies that</p>
+        <div class="cert-input-wrapper">
+          <input type="text" id="cert-name" placeholder="Type your name here..." autocomplete="off" spellcheck="false" />
+        </div>
+        <p>has successfully completed the</p>
+        <h3>English Adventures Journey!</h3>
+        <p>Earning all 6 ⭐ from Foxy the Smart Fox.</p>
+        <div class="cert-signatures">
+          <div class="sig">
+            <span class="sig-line">✏️ Teacher Laura</span>
+          </div>
+          <div class="sig">
+            <span class="sig-line">🧸 Teacher Danny</span>
+          </div>
+          <div class="sig">
+            <span class="sig-line">🦊 Foxy</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions hide-on-print">
+        <button class="modal-btn" onclick="closeCertificate()">Close</button>
+        <button class="modal-btn next-activity" onclick="printCertificate()">🖨️ Save/Print PDF</button>
       </div>
     </div>
   </div>
