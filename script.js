@@ -524,7 +524,7 @@ function checkDrawing() {
 const correctAnswers = { 1: 'b', 2: 'b', 3: 'a' };
 let readingAnswers = {};
 
-function selectReadingAnswer(qNum, element, isCorrect) {
+function checkAnswer(qNum, answer) {
   playPopSound();
   const block = document.getElementById('q' + qNum + '-block');
   const btns = block.querySelectorAll('.answer-btn');
@@ -534,7 +534,10 @@ function selectReadingAnswer(qNum, element, isCorrect) {
     b.disabled = true;
   });
 
-  readingAnswers[qNum] = element.dataset.answer;
+  readingAnswers[qNum] = answer;
+  const isCorrect = (answer === correctAnswers[qNum]);
+  const element = document.getElementById('q' + qNum + answer);
+
   if (isCorrect) {
     element.classList.add('correct');
     const resultEl = document.getElementById('q' + qNum + '-result');
