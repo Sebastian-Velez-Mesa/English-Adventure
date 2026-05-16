@@ -1,30 +1,30 @@
 /* ============================
-   GRADE 3 LEARNING — JAVASCRIPT
+   GRADE 3 LEARNING - JAVASCRIPT
    ============================ */
 
 // ===== ANIMALS LIST =====
 const animals = [
-  { emoji: '🐘', name: 'elephant' },
-  { emoji: '🦁', name: 'lion' },
-  { emoji: '🐬', name: 'dolphin' },
-  { emoji: '🐧', name: 'penguin' },
-  { emoji: '🦊', name: 'fox' },
-  { emoji: '🐨', name: 'koala' },
-  { emoji: '🦋', name: 'butterfly' },
-  { emoji: '🐢', name: 'turtle' },
-  { emoji: '🦒', name: 'giraffe' },
-  { emoji: '🐺', name: 'wolf' },
+  { emoji: '\u{1F418}', name: 'elephant' },
+  { emoji: '\u{1F981}', name: 'lion' },
+  { emoji: '\u{1F42C}', name: 'dolphin' },
+  { emoji: '\u{1F427}', name: 'penguin' },
+  { emoji: '\u{1F98A}', name: 'fox' },
+  { emoji: '\u{1F428}', name: 'koala' },
+  { emoji: '\u{1F98B}', name: 'butterfly' },
+  { emoji: '\u{1F422}', name: 'turtle' },
+  { emoji: '\u{1F992}', name: 'giraffe' },
+  { emoji: '\u{1F43A}', name: 'wolf' },
 ];
 
 let currentAnimalIndex = 0;
 
 // ===== FEEDBACK MESSAGES =====
 const feedbackMessages = [
-  { emoji: '🎉', title: 'Good job!', subtitle: 'You\'re doing amazing!' },
-  { emoji: '🌟', title: 'Amazing!', subtitle: 'Keep up the great work!' },
-  { emoji: '💪', title: 'You can do it!', subtitle: 'Wonderful effort!' },
-  { emoji: '⭐', title: 'Fantastic!', subtitle: 'You\'re a star learner!' },
-  { emoji: '🏆', title: 'Excellent!', subtitle: 'You\'re a champion!' },
+  { emoji: '\u{1F389}', title: 'Good job!', subtitle: "You're doing amazing!" },
+  { emoji: '\u{1F31F}', title: 'Amazing!', subtitle: 'Keep up the great work!' },
+  { emoji: '\u{1F4AA}', title: 'You can do it!', subtitle: 'Wonderful effort!' },
+  { emoji: '\u{2B50}', title: 'Fantastic!', subtitle: "You're a star learner!" },
+  { emoji: '\u{1F3C6}', title: 'Excellent!', subtitle: "You're a champion!" },
 ];
 
 let currentActivity = 'writing';
@@ -77,6 +77,7 @@ function playDingDongSound() {
 }
 
 function playErrorSound() {
+  if(typeof zenApp !== 'undefined' && zenApp) zenApp.triggerReaction('surprised');
   initAudio();
   if(!audioCtx) return;
   const osc = audioCtx.createOscillator();
@@ -143,10 +144,10 @@ function playActivitySound(activity) {
   }
 }
 
-// ===== FOXY THE FOX & PERSISTENCE =====
-let foxyStarsCompleted = new Set();
-const foxyMessages = {
-  'home': "Hi! I’m Foxy! Let’s explore English together!",
+// ===== Zen THE FOX & PERSISTENCE =====
+let zenStarsCompleted = new Set();
+const ZenMessages = {
+  'home': "Hi! I'm Zen! Let's explore English together!",
   'characters': "These are my friends! They will help us learn!",
   'menu': "Wow! So many adventures! Where do we go first?",
   'activity-writing': "Let's write something together! Time to create ideas!",
@@ -159,55 +160,55 @@ const foxyMessages = {
 };
 
 function saveProgress() {
-  localStorage.setItem('foxyProgress', JSON.stringify(Array.from(foxyStarsCompleted)));
+  localStorage.setItem('ZenProgress', JSON.stringify(Array.from(zenStarsCompleted)));
 }
 
 function loadProgress() {
-  const saved = localStorage.getItem('foxyProgress');
+  const saved = localStorage.getItem('ZenProgress');
   if (saved) {
     const arr = JSON.parse(saved);
-    arr.forEach(id => foxyStarsCompleted.add(id));
+    arr.forEach(id => zenStarsCompleted.add(id));
     
-    let foxyStars = foxyStarsCompleted.size;
-    const countEl = document.getElementById('foxy-stars-count');
-    if (countEl) countEl.textContent = foxyStars;
+    let zenStars = zenStarsCompleted.size;
+    const countEl = document.getElementById('zen-stars-count');
+    if (countEl) countEl.textContent = zenStars;
     
-    if (foxyStars === 6) {
+    if (zenStars === 6) {
        document.getElementById('nav-cert-btn')?.classList.remove('hidden');
     }
   }
 }
 
-function awardFoxyStar(activityId) {
-  if (!foxyStarsCompleted.has(activityId)) {
-    foxyStarsCompleted.add(activityId);
+function awardZenStar(activityId) {
+  if (!zenStarsCompleted.has(activityId)) {
+    zenStarsCompleted.add(activityId);
     saveProgress();
     playDingDongSound();
     
-    let foxyStars = foxyStarsCompleted.size;
-    const countEl = document.getElementById('foxy-stars-count');
-    if (countEl) countEl.textContent = foxyStars;
+    let zenStars = zenStarsCompleted.size;
+    const countEl = document.getElementById('zen-stars-count');
+    if (countEl) countEl.textContent = zenStars;
     
-    const foxyEl = document.getElementById('foxy-progress');
-    if (foxyEl) {
-      foxyEl.style.transform = 'scale(1.15)';
-      foxyEl.style.transition = 'transform 0.3s';
-      setTimeout(() => { foxyEl.style.transform = 'scale(1)'; }, 300);
+    const ZenEl = document.getElementById('zen-progress');
+    if (ZenEl) {
+      ZenEl.style.transform = 'scale(1.15)';
+      ZenEl.style.transition = 'transform 0.3s';
+      setTimeout(() => { ZenEl.style.transform = 'scale(1)'; }, 300);
     }
     
-    if (foxyStars === 6) {
+    if (zenStars === 6) {
        document.getElementById('nav-cert-btn')?.classList.remove('hidden');
        setTimeout(() => {
-         updateFoxyMessage("Wow! You got all 6 stars! You completed the journey! 🎉");
+         updateZenMessage("Wow! You got all 6 stars! You completed the journey! \u{1F389}");
          document.getElementById('certificate-modal')?.classList.remove('hidden');
        }, 1500);
     }
   }
 }
 
-function updateFoxyMessage(text) {
-  const guide = document.getElementById('foxy-floating-guide');
-  const guideText = document.getElementById('foxy-guide-text');
+function updateZenMessage(text) {
+  const guide = document.getElementById('zen-floating-guide');
+  const guideText = document.getElementById('zen-guide-text');
   if (!guide || !guideText) return;
   
   guide.classList.remove('visible');
@@ -219,7 +220,7 @@ function updateFoxyMessage(text) {
 
 // Ensure first message is loaded
 document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(() => updateFoxyMessage(foxyMessages['home']), 500);
+  setTimeout(() => updateZenMessage(ZenMessages['home']), 500);
 });
 
 // ===== SECTION NAVIGATION =====
@@ -229,7 +230,7 @@ function showSection(id) {
   if (target) {
     target.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (foxyMessages[id]) updateFoxyMessage(foxyMessages[id]);
+    if (ZenMessages[id]) updateZenMessage(ZenMessages[id]);
     if (id === 'challenge') playActivitySound('challenge');
   }
 }
@@ -261,7 +262,7 @@ function helloLaura() {
   response.style.animation = 'fadeInUp 0.4s ease';
   const btn = document.querySelector('.laura-btn');
   if(btn) {
-    btn.textContent = '💜 Nice to meet you!';
+    btn.textContent = '\u{1F49C} Nice to meet you!';
     btn.disabled = true;
     btn.style.opacity = '0.7';
   }
@@ -273,7 +274,7 @@ function helloDanny() {
   response.style.animation = 'fadeInUp 0.4s ease';
   const btn = document.querySelector('.daniel-btn');
   if(btn) {
-    btn.textContent = '💜 Nice to meet you!';
+    btn.textContent = '\u{1F49C} Nice to meet you!';
     btn.disabled = true;
     btn.style.opacity = '0.7';
   }
@@ -283,13 +284,13 @@ function selectLike(btn, message) {
   document.querySelectorAll('.like-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   const response = document.getElementById('laura-response');
-  response.textContent = '💕 Laura says: ' + message;
+  response.textContent = '\u{1F497} Laura says: ' + message;
   response.classList.remove('hidden');
 }
 
 function danielActivity(message) {
   const response = document.getElementById('daniel-response');
-  response.textContent = '🧸 ' + message;
+  response.textContent = '\u{1F439} ' + message;
   response.classList.remove('hidden');
   response.style.animation = 'fadeInUp 0.4s ease';
 }
@@ -305,7 +306,7 @@ function checkWriting() {
   if (!s1 || !s2 || !s3) {
     feedback.classList.remove('hidden');
     feedback.classList.add('error');
-    feedback.innerHTML = '✏️ Please write all 3 sentences before checking!';
+    feedback.innerHTML = '\u{26A0}\u{FE0F} Please write all 3 sentences before checking!';
     playErrorSound();
     return;
   }
@@ -314,11 +315,11 @@ function checkWriting() {
 
   feedback.classList.remove('hidden', 'error');
   if (sentenceCount === 3) {
-    feedback.innerHTML = '🎉 Excellent! Your 3 sentences look great! Well done!';
-    awardFoxyStar('writing');
+    feedback.innerHTML = '\u{1F389} Excellent! Your 3 sentences look great! Well done!';
+    awardZenStar('writing');
     setTimeout(() => showFeedbackModal('writing'), 600);
   } else {
-    feedback.innerHTML = '🌟 Good try! Try to write longer sentences with more details.';
+    feedback.innerHTML = '\u{1F31F} Good try! Try to write longer sentences with more details.';
     playErrorSound();
   }
 }
@@ -510,13 +511,13 @@ function checkDrawing() {
   if (!s1 || !s2) {
     feedback.classList.remove('hidden');
     feedback.classList.add('error');
-    feedback.innerHTML = '✏️ Please write both sentences about your drawing!';
+    feedback.innerHTML = '\u{1F3A8} Please write both sentences about your drawing!';
     return;
   }
 
   feedback.classList.remove('hidden', 'error');
-  feedback.innerHTML = '🎨 Wonderful! Your drawing and description are amazing!';
-  awardFoxyStar('drawing');
+  feedback.innerHTML = '\u{1F3A8} Wonderful! Your drawing and description are amazing!';
+  awardZenStar('drawing');
   setTimeout(() => showFeedbackModal('drawing'), 600);
 }
 
@@ -542,14 +543,14 @@ function checkAnswer(qNum, answer) {
     element.classList.add('correct');
     const resultEl = document.getElementById('q' + qNum + '-result');
     resultEl.classList.remove('hidden');
-    resultEl.innerHTML = '✅ Correct! Well done!';
+    resultEl.innerHTML = '\u{2705} Correct! Well done!';
     resultEl.style.color = '#6ee7b7';
   } else {
     element.classList.add('wrong');
     document.getElementById('q' + qNum + correctAnswers[qNum]).classList.add('correct');
     const resultEl = document.getElementById('q' + qNum + '-result');
     resultEl.classList.remove('hidden');
-    resultEl.innerHTML = '❌ Not quite! The correct answer is highlighted.';
+    resultEl.innerHTML = '\u{274C} Not quite! The correct answer is highlighted.';
     resultEl.style.color = '#fca5a5';
   }
 }
@@ -560,7 +561,7 @@ function checkReading() {
 
   if (Object.keys(readingAnswers).length < 3) {
     scoreEl.classList.add('error');
-    scoreEl.innerHTML = '⚠️ Please answer all 3 questions first!';
+    scoreEl.innerHTML = '\u{26A0}\u{FE0F} Please answer all 3 questions first!';
     playErrorSound();
     return;
   }
@@ -569,10 +570,10 @@ function checkReading() {
     .filter(([q, a]) => correctAnswers[q] === a).length;
 
   const messages = [
-    { score: 3, msg: '🏆 Perfect score! 3/3 — You\'re a reading star!' },
-    { score: 2, msg: '🌟 Great job! 2/3 — Almost perfect!' },
-    { score: 1, msg: '💪 Good effort! 1/3 — Keep practicing!' },
-    { score: 0, msg: '📖 Keep reading! 0/3 — You\'ll get better!' },
+    { score: 3, msg: '\u{1F3C6} Perfect score! 3/3 \u2014 You\'re a reading star!' },
+    { score: 2, msg: '\u{1F31F} Great job! 2/3 \u2014 Almost perfect!' },
+    { score: 1, msg: '\u{1F4AA} Good effort! 1/3 \u2014 Keep practicing!' },
+    { score: 0, msg: '\u{1F4D6} Keep reading! 0/3 \u2014 You\'ll get better!' },
   ];
 
   const entry = messages.find(m => m.score === score) || messages[3];
@@ -580,7 +581,7 @@ function checkReading() {
 
   if (score === 3) {
     playActivitySound();
-    awardFoxyStar('reading');
+    awardZenStar('reading');
   } else {
     playErrorSound();
   }
@@ -624,7 +625,7 @@ function startSpeaking() {
   const feedback = document.getElementById('speaking-feedback');
 
   btn.classList.add('recording');
-  icon.textContent = '⏹️';
+  icon.textContent = '\u{23FA}\u{FE0F}';
   label.textContent = 'Stop';
   timer.classList.remove('hidden');
   waves.classList.remove('hidden');
@@ -652,20 +653,20 @@ function stopSpeaking(completed = false) {
   const feedback = document.getElementById('speaking-feedback');
 
   btn.classList.remove('recording');
-  icon.textContent = '🎤';
+  icon.textContent = '\u{1F3A4}';
   label.textContent = 'Start Speaking';
   timer.classList.add('hidden');
   waves.classList.add('hidden');
 
   feedback.classList.remove('hidden', 'error');
   if (completed) {
-    feedback.innerHTML = '🎉 Wow! You spoke clearly and confidently! Great job!';
+    feedback.innerHTML = '\u{1F389} Wow! You spoke clearly and confidently! Great job!';
     playActivitySound();
-    awardFoxyStar('speaking');
+    awardZenStar('speaking');
     setTimeout(() => showFeedbackModal('speaking'), 800);
   } else {
     feedback.classList.add('error');
-    feedback.innerHTML = '❌ Recording stopped. Try to speak for a bit longer!';
+    feedback.innerHTML = '\u{274C} Recording stopped. Try to speak for a bit longer!';
     playErrorSound();
   }
 }
@@ -677,7 +678,7 @@ function selectAnimal(emoji, name) {
   event.target.classList.add('selected');
   const display = document.getElementById('selected-animal-display');
   display.classList.remove('hidden');
-  display.innerHTML = `${emoji} Talk about a <strong>${name}</strong>! 🎤`;
+  display.innerHTML = `${emoji} Talk about a <strong>${name}</strong>! \u{1F31F}`;
 }
 
 // ===== CHALLENGE SUBMISSIONS =====
@@ -695,17 +696,17 @@ function submitWritingChallenge() {
   if (filled === 0) {
     result.classList.remove('hidden');
     result.classList.add('error');
-    result.innerHTML = '✏️ Please write your sentences first!';
+    result.innerHTML = '\u{26A0}\u{FE0F} Please write your sentences first!';
     return;
   }
 
   result.classList.remove('hidden', 'error');
   if (filled === 4) {
-    result.innerHTML = '🏆 CHALLENGE COMPLETE! All 4 sentences done! You\'re amazing!';
-    awardFoxyStar('challenge');
+    result.innerHTML = '\u{1F3C6} CHALLENGE COMPLETE! All 4 sentences done! You\'re amazing!';
+    awardZenStar('challenge');
     showFeedbackModal('challenge');
   } else {
-    result.innerHTML = `🌟 Great start! You wrote ${filled}/4 sentences. Try to finish all 4!`;
+    result.innerHTML = `\u{1F31F} Great start! You wrote ${filled}/4 sentences. Try to finish all 4!`;
   }
 }
 
@@ -716,12 +717,12 @@ function submitDrawingChallenge() {
   if (!desc) {
     result.classList.remove('hidden');
     result.classList.add('error');
-    result.innerHTML = '🎨 Please describe your dream place!';
+    result.innerHTML = '\u{1F3A8} Please describe your dream place!';
     return;
   }
 
   result.classList.remove('hidden', 'error');
-  result.innerHTML = '🌟 Fantastic! Your dream place is beautiful!';
+  result.innerHTML = '\u{1F31F} Fantastic! Your dream place is beautiful!';
   showFeedbackModal('challenge');
 }
 
@@ -749,7 +750,7 @@ function startChallengeSpeaking() {
   const result = document.getElementById('challenge-speaking-result');
 
   btn.classList.add('recording');
-  icon.textContent = '⏹️';
+  icon.textContent = '\u{23FA}\u{FE0F}';
   label.textContent = 'Stop';
   timer.classList.remove('hidden');
   waves.classList.remove('hidden');
@@ -777,390 +778,160 @@ function stopChallengeSpeaking(completed = false) {
   const result = document.getElementById('challenge-speaking-result');
 
   btn.classList.remove('recording');
-  icon.textContent = '🎤';
+  icon.textContent = '\u{1F3A4}';
   label.textContent = 'Start!';
   timer.classList.add('hidden');
   waves.classList.add('hidden');
 
   result.classList.remove('hidden', 'error');
   if (completed) {
-    result.innerHTML = '🏆 CHALLENGE COMPLETE! You spoke for 30 seconds! Incredible!';
+    result.innerHTML = '\u{1F3C6} CHALLENGE COMPLETE! You spoke for 30 seconds! Incredible!';
     showFeedbackModal('challenge');
   } else {
-    result.innerHTML = '🎤 Keep going! Try to speak for the full 30 seconds!';
+    result.innerHTML = '\u{1F3A4} Keep going! Try to speak for the full 30 seconds!';
   }
 }
 
 // ===== FEEDBACK MODAL =====
 function showFeedbackModal(activityType) {
+  const modal = document.getElementById('feedback-modal');
+  if (!modal) return;
+
   const msg = feedbackMessages[Math.floor(Math.random() * feedbackMessages.length)];
   document.getElementById('modal-emoji').textContent = msg.emoji;
   document.getElementById('modal-title').textContent = msg.title;
   document.getElementById('modal-subtitle').textContent = msg.subtitle;
-  currentActivity = activityType;
-  document.getElementById('feedback-modal').classList.remove('hidden');
+
+  modal.classList.remove('hidden');
+  
+  if (typeof zenApp !== 'undefined' && zenApp) {
+      zenApp.triggerReaction('excited');
+      updateZenMessage("Incredible work! You are getting closer to the certificate! \u2B50");
+  }
+}
+
+function nextActivity() {
+  const modal = document.getElementById('feedback-modal');
+  if (modal) modal.classList.add('hidden');
+  
+  const currentIndex = activityOrder.indexOf(currentActivity);
+  if (currentIndex < activityOrder.length - 1) {
+    showActivity(activityOrder[currentIndex + 1]);
+  } else {
+    showSection('challenge');
+  }
 }
 
 function tryAgain() {
-  document.getElementById('feedback-modal').classList.add('hidden');
-  // Reset the current activity
-  if (currentActivity === 'writing') {
-    ['sentence1','sentence2','sentence3'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('writing-feedback').classList.add('hidden');
-  } else if (currentActivity === 'drawing') {
-    clearCanvas();
-    ['draw-sentence1','draw-sentence2'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('drawing-feedback').classList.add('hidden');
-  } else if (currentActivity === 'reading') {
-    resetReading();
-  } else if (currentActivity === 'speaking') {
-    document.getElementById('speaking-feedback').classList.add('hidden');
-  } else if (currentActivity === 'vocabulary') {
-    loadVocabRound();
-  }
+  const modal = document.getElementById('feedback-modal');
+  if (modal) modal.classList.add('hidden');
 }
 
-// ===== VOCABULARY GAME ENGINE =====
+// ===== VOCABULARY GAME LOGIC =====
 const VOCAB_BANK = [
-  // Level 1 — basic objects
-  [
-    { word: 'cat',     emoji: '🐱' },
-    { word: 'dog',     emoji: '🐶' },
-    { word: 'sun',     emoji: '☀️' },
-    { word: 'tree',    emoji: '🌳' },
-    { word: 'apple',   emoji: '🍎' },
-  ],
-  // Level 2 — animals
-  [
-    { word: 'lion',    emoji: '🦁' },
-    { word: 'fish',    emoji: '🐟' },
-    { word: 'bird',    emoji: '🐦' },
-    { word: 'frog',    emoji: '🐸' },
-    { word: 'horse',   emoji: '🐴' },
-  ],
-  // Level 3 — food
-  [
-    { word: 'bread',   emoji: '🍞' },
-    { word: 'milk',    emoji: '🥛' },
-    { word: 'cake',    emoji: '🎂' },
-    { word: 'pizza',   emoji: '🍕' },
-    { word: 'egg',     emoji: '🥚' },
-  ],
-  // Level 4 — places/things
-  [
-    { word: 'house',   emoji: '🏠' },
-    { word: 'school',  emoji: '🏫' },
-    { word: 'car',     emoji: '🚗' },
-    { word: 'book',    emoji: '📚' },
-    { word: 'ball',    emoji: '⚽' },
-  ],
-  // Level 5 — nature
-  [
-    { word: 'star',    emoji: '⭐' },
-    { word: 'moon',    emoji: '🌙' },
-    { word: 'cloud',   emoji: '☁️' },
-    { word: 'rain',    emoji: '🌧️' },
-    { word: 'flower',  emoji: '🌸' },
-  ],
+  { level: 1, pairs: [ { w: 'dog', e: '\u{1F436}' }, { w: 'cat', e: '\u{1F431}' }, { w: 'bird', e: '\u{1F426}' }, { w: 'fish', e: '\u{1F41F}' } ] },
+  { level: 2, pairs: [ { w: 'apple', e: '\u{1F34E}' }, { w: 'banana', e: '\u{1F34C}' }, { w: 'milk', e: '\u{1F95B}' }, { w: 'bread', e: '\u{1F35E}' } ] },
+  { level: 3, pairs: [ { w: 'red', e: '\u{1F534}' }, { w: 'blue', e: '\u{1F535}' }, { w: 'green', e: '\u{1F7E2}' }, { w: 'yellow', e: '\u{1F7E1}' } ] },
+  { level: 4, pairs: [ { w: 'sun', e: '\u{2600}\u{FE0F}' }, { w: 'moon', e: '\u{1F319}' }, { w: 'star', e: '\u2B50' }, { w: 'cloud', e: '\u{2601}\u{FE0F}' } ] },
+  { level: 5, pairs: [ { w: 'happy', e: '\u{1F60A}' }, { w: 'sad', e: '\u{1F622}' }, { w: 'big', e: '\u{1F418}' }, { w: 'small', e: '\u{1F42D}' } ] }
 ];
 
-let vocabLevel     = 0;
-let vocabScore     = 0;
-let vocabTotal     = 0;
-let vocabPairs     = [];
-let selectedWord   = null;
-let selectedImage  = null;
-let confirmedPairs = [];   // [{wordIdx, imageIdx}]
+let vocabCurrentLevel = 1;
+let vocabSelectedWord = null;
+let vocabSelectedImage = null;
+let vocabMatches = [];
 
 function loadVocabRound() {
-  // Reset state
-  selectedWord  = null;
-  selectedImage = null;
-  confirmedPairs = [];
+  const round = VOCAB_BANK.find(r => r.level === vocabCurrentLevel);
+  if (!round) return;
 
-  const level = VOCAB_BANK[vocabLevel % VOCAB_BANK.length];
-  // Shuffle a copy and pick 4 items
-  const shuffled = [...level].sort(() => Math.random() - 0.5).slice(0, 4);
-  vocabPairs = shuffled;
-
-  // Build word tiles (in order)
   const wordsCol = document.getElementById('words-column');
-  wordsCol.innerHTML = '<div class="vocab-col-title">📝 Words</div>';
-  vocabPairs.forEach((pair, i) => {
+  const imagesCol = document.getElementById('images-column');
+  
+  wordsCol.innerHTML = '<div class="vocab-col-title">\u{1F4CD} Words</div>';
+  imagesCol.innerHTML = '<div class="vocab-col-title">\u{1F5BC}\u{FE0F} Pictures</div>';
+  
+  vocabSelectedWord = null;
+  vocabSelectedImage = null;
+  vocabMatches = [];
+
+  const words = [...round.pairs].sort(() => Math.random() - 0.5);
+  const images = [...round.pairs].sort(() => Math.random() - 0.5);
+
+  words.forEach(p => {
     const btn = document.createElement('button');
-    btn.className = 'vocab-word-tile';
-    btn.textContent = pair.word;
-    btn.dataset.idx = i;
-    btn.id = 'vword-' + i;
-    btn.onclick = () => selectVocabWord(i);
+    btn.className = 'vocab-tile';
+    btn.textContent = p.w;
+    btn.onclick = () => selectVocabWord(btn, p.w);
     wordsCol.appendChild(btn);
   });
 
-  // Build image tiles (shuffled order)
-  const imagesCol = document.getElementById('images-column');
-  imagesCol.innerHTML = '<div class="vocab-col-title">🖼️ Pictures</div>';
-  const imageOrder = [...Array(vocabPairs.length).keys()].sort(() => Math.random() - 0.5);
-  imageOrder.forEach((pairIdx, displayIdx) => {
+  images.forEach(p => {
     const btn = document.createElement('button');
-    btn.className = 'vocab-image-tile';
-    btn.textContent = vocabPairs[pairIdx].emoji;
-    btn.dataset.pairIdx = pairIdx;
-    btn.dataset.displayIdx = displayIdx;
-    btn.id = 'vimage-' + displayIdx;
-    btn.onclick = () => selectVocabImage(pairIdx, displayIdx);
+    btn.className = 'vocab-tile image-tile';
+    btn.textContent = p.e;
+    btn.onclick = () => selectVocabImage(btn, p.w);
     imagesCol.appendChild(btn);
   });
-
-  // Clear SVG lines
-  clearVocabLines();
-
-  // Reset result + buttons
-  const result = document.getElementById('vocab-result');
-  result.classList.add('hidden');
-  result.innerHTML = '';
-  document.getElementById('vocab-check-btn').style.display = '';
-  document.getElementById('vocab-next-btn').style.display = 'none';
-
-  // Update level display
-  document.getElementById('vocab-level').textContent = (vocabLevel % VOCAB_BANK.length) + 1;
+  
+  document.getElementById('vocab-next-btn').style.visibility = 'hidden';
   updateVocabScoreBar();
 }
 
-function selectVocabWord(wordIdx) {
-  if (confirmedPairs.some(p => p.wordIdx === wordIdx)) return; // already matched
-  playPopSound();
-  
-  // Deselect previous
-  document.querySelectorAll('.vocab-word-tile').forEach(b => b.classList.remove('selected'));
-  selectedWord = wordIdx;
-  document.getElementById('vword-' + wordIdx).classList.add('selected');
-
-  // If image already selected, attempt match
-  if (selectedImage !== null) attemptVocabMatch();
+function selectVocabWord(btn, word) {
+  document.querySelectorAll('#words-column .vocab-tile').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  vocabSelectedWord = { btn, word };
+  if (vocabSelectedImage) attemptVocabMatch();
 }
 
-function selectVocabImage(pairIdx, displayIdx) {
-  if (confirmedPairs.some(p => p.imageIdx === pairIdx)) return; // already matched
-  playPopSound();
-
-  // Deselect previous
-  document.querySelectorAll('.vocab-image-tile').forEach(b => b.classList.remove('selected'));
-  selectedImage = pairIdx;
-  document.getElementById('vimage-' + displayIdx).classList.add('selected');
-
-  // If word already selected, attempt match
-  if (selectedWord !== null) attemptVocabMatch();
+function selectVocabImage(btn, word) {
+  document.querySelectorAll('#images-column .vocab-tile').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  vocabSelectedImage = { btn, word };
+  if (vocabSelectedWord) attemptVocabMatch();
 }
 
 function attemptVocabMatch() {
-  const wordTile  = document.getElementById('vword-' + selectedWord);
-  const imageTile = findImageTileByPairIdx(selectedImage);
-
-  if (selectedWord === selectedImage) {
-    // Correct!
+  if (vocabSelectedWord.word === vocabSelectedImage.word) {
+    vocabMatches.push(vocabSelectedWord.word);
+    vocabSelectedWord.btn.classList.add('matched');
+    vocabSelectedImage.btn.classList.add('matched');
     playPopSound();
-    confirmedPairs.push({ wordIdx: selectedWord, imageIdx: selectedImage });
-    wordTile.classList.remove('selected');
-    wordTile.classList.add('matched');
-    imageTile.classList.remove('selected');
-    imageTile.classList.add('matched');
-    // Add checkmark
-    const check = document.createElement('span');
-    check.className = 'tile-check';
-    check.textContent = '✅';
-    imageTile.appendChild(check);
   } else {
-    // Wrong
-    playErrorSound();
-    wordTile.classList.add('wrong-match');
-    imageTile.classList.add('wrong-match');
+    vocabSelectedWord.btn.classList.add('shake');
+    vocabSelectedImage.btn.classList.add('shake');
     setTimeout(() => {
-      wordTile.classList.remove('wrong-match', 'selected');
-      imageTile.classList.remove('wrong-match', 'selected');
-    }, 600);
+      vocabSelectedWord.btn.classList.remove('shake', 'selected');
+      vocabSelectedImage.btn.classList.remove('shake', 'selected');
+    }, 500);
+    playErrorSound();
   }
-
-  selectedWord  = null;
-  selectedImage = null;
-
-  // Auto check if all matched
-  if (confirmedPairs.length === vocabPairs.length) {
-    setTimeout(() => checkVocabMatches(true), 400);
-  }
-}
-
-function findImageTileByPairIdx(pairIdx) {
-  return document.querySelector(`.vocab-image-tile[data-pair-idx="${pairIdx}"]`);
-}
-
-function checkVocabMatches(autoChecked = false) {
-  const result = document.getElementById('vocab-result');
-  const correct = confirmedPairs.length;
-  const total   = vocabPairs.length;
-
-  vocabScore += correct;
-  vocabTotal += total;
-
-  document.getElementById('vocab-score').textContent = vocabScore;
+  vocabSelectedWord = null;
+  vocabSelectedImage = null;
   updateVocabScoreBar();
-
-  result.classList.remove('hidden', 'error');
-
-  if (correct === total) {
-    result.innerHTML = `🏆 Perfect! ${correct}/${total} — You matched all the words! Amazing!`;
-    document.getElementById('vocab-check-btn').style.display = 'none';
-    document.getElementById('vocab-next-btn').style.display = '';
-    awardFoxyStar('vocabulary');
-    setTimeout(() => {
-      vocabLevel++;
-      showFeedbackModal('vocabulary');
-    }, 700);
-  } else if (correct >= Math.ceil(total / 2)) {
-    result.innerHTML = `🌟 Great job! ${correct}/${total} matched. Keep going!`;
-    document.getElementById('vocab-check-btn').style.display = 'none';
-    document.getElementById('vocab-next-btn').style.display = '';
-  } else {
-    playErrorSound();
-    result.innerHTML = `💪 You got ${correct}/${total}. Try again — you can do it!`;
-    result.classList.add('error');
-  }
 }
 
 function updateVocabScoreBar() {
-  const el = document.getElementById('vocab-score');
-  if (el) el.textContent = vocabScore;
-  const fill = document.getElementById('vocab-progress-fill');
-  if (fill && vocabTotal > 0) {
-    const pct = Math.min(100, Math.round((vocabScore / Math.max(vocabTotal, 1)) * 100));
-    fill.style.width = pct + '%';
+  const bar = document.getElementById('vocab-score-fill');
+  const count = vocabMatches.length;
+  const percentage = (count / 4) * 100;
+  if (bar) bar.style.width = percentage + '%';
+  
+  if (count === 4) {
+    document.getElementById('vocab-next-btn').style.visibility = 'visible';
   }
 }
 
-function clearVocabLines() {
-  const svg = document.getElementById('vocab-svg');
-  if (svg) svg.innerHTML = '';
-}
-
-// ===== NEXT ACTIVITY (updated) =====
-function nextActivity() {
-  document.getElementById('feedback-modal').classList.add('hidden');
-  const idx = activityOrder.indexOf(currentActivity);
-  if (idx === -1 || currentActivity === 'challenge') {
-    showSection('menu');
-    return;
-  }
-  const next = activityOrder[(idx + 1) % activityOrder.length];
-  showActivity(next);
-}
-
-// ===== INIT =====
-document.addEventListener('DOMContentLoaded', () => {
-  // Init canvases
-  initCanvas();
-  initChallengeCanvas();
-
-  // Set initial animal
-  document.getElementById('animal-emoji').textContent = animals[0].emoji;
-
-  // Init vocabulary game
-  loadVocabRound();
-  
-  // Load saved progress
-  loadProgress();
-
-  // Keyboard shortcut: Escape closes modal
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.getElementById('feedback-modal').classList.add('hidden');
-    }
-  });
-
-  // Click outside modal to close
-  document.getElementById('feedback-modal').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('feedback-modal')) {
-      document.getElementById('feedback-modal').classList.add('hidden');
-    }
-  });
-
-  console.log('🌞 Grade 3 Learning App Ready! Vocabulary Game loaded.');
-});
-
-// ===== HELP FORM =====
-function openContactForm(type) {
-  const container = document.getElementById('help-form-container');
-  const buttons = document.getElementById('help-buttons');
-  const title = document.getElementById('help-form-title');
-  const textarea = document.getElementById('help-textarea');
-  const success = document.getElementById('help-success');
-  
-  if(success) success.classList.add('hidden');
-  if(textarea) textarea.value = '';
-  
-  if (type === 'teacher') title.textContent = '👩‍🏫 Ask Teacher Laura';
-  else if (type === 'question') title.textContent = '❓ Ask Teacher Danny';
-  else if (type === 'suggestion') title.textContent = '💌 Suggestions Box';
-  
-  buttons.classList.add('hidden');
-  container.classList.remove('hidden');
-}
-
-function closeContactForm() {
-  document.getElementById('help-form-container').classList.add('hidden');
-  document.getElementById('help-buttons').classList.remove('hidden');
-}
-
-function sendContactForm() {
-  const textarea = document.getElementById('help-textarea');
-  if (!textarea.value.trim()) {
-    alert("Please write something first!");
-    return;
-  }
-  
-  document.getElementById('help-success').classList.remove('hidden');
-  textarea.value = '';
-  
-  setTimeout(() => {
-    closeContactForm();
-    document.getElementById('help-success').classList.add('hidden');
-  }, 2500);
-}
-
-// ===== CERTIFICATE =====
-function showCertificateModal() {
-  const modal = document.getElementById('certificate-modal');
-  if (modal) {
-    modal.classList.remove('hidden');
-    const foxyGuide = document.getElementById('foxy-floating-guide');
-    if (foxyGuide) foxyGuide.classList.remove('visible');
-    playPopSound();
-  }
-}
-function printCertificate() {
-  window.print();
-}
-function closeCertificate() {
-  document.getElementById('certificate-modal').classList.add('hidden');
-}
-
-// ===== MISSING STARS CHECK =====
-function checkMissingStars() {
-  const allActivities = ['writing', 'drawing', 'reading', 'speaking', 'vocabulary', 'challenge'];
-  const missing = allActivities.filter(act => !foxyStarsCompleted.has(act));
-  
-  if (missing.length === 0) {
-    updateFoxyMessage("You have all the stars! Time to get your Certificate! 🏆");
-  } else {
-    // translate activity keys to nice words
-    const niceNames = {
-      'writing': 'Writing ✍️',
-      'drawing': 'Drawing 🎨',
-      'reading': 'Reading 📖',
-      'speaking': 'Speaking 💬',
-      'vocabulary': 'Vocabulary 🎮',
-      'challenge': 'Final Challenge 🌟'
-    };
-    const missingNames = missing.map(act => niceNames[act]).join(', ');
-    updateFoxyMessage(`You are missing: ${missingNames}. Let's go get them!`);
+function checkVocabMatches() {
+  if (vocabMatches.length === 4) {
+     if (vocabCurrentLevel < 5) {
+       vocabCurrentLevel++;
+       loadVocabRound();
+     } else {
+       awardZenStar('vocabulary');
+       showFeedbackModal('vocabulary');
+     }
   }
 }
 
@@ -1172,12 +943,12 @@ function toggleTheme() {
   
   if (current === 'light') {
     html.removeAttribute('data-theme');
-    btn.textContent = '☀️ Day Mode';
+    btn.textContent = '\u{2600}\u{FE0F} Day Mode';
     btn.style.color = '#fcd34d';
     btn.style.background = 'rgba(255,255,255,0.1)';
   } else {
     html.setAttribute('data-theme', 'light');
-    btn.textContent = '🌙 Night Mode';
+    btn.textContent = '\u{1F319} Night Mode';
     btn.style.color = '#1e293b';
     btn.style.background = 'rgba(0,0,0,0.1)';
   }
@@ -1185,33 +956,24 @@ function toggleTheme() {
 }
 
 // ===== EASTER EGGS =====
-let foxyClickCount = 0;
-let foxyTimer = null;
+let ZenClickCount = 0;
+let ZenTimer = null;
 
-function foxyEasterEgg() {
-  foxyClickCount++;
-  const avatar = document.getElementById('foxy-avatar-egg');
+function ZenEasterEgg() {
+  ZenClickCount++;
+  const avatar = document.getElementById('zen-avatar-egg');
+  if (ZenTimer) clearTimeout(ZenTimer);
   
-  // Clear timer if clicking fast
-  if (foxyTimer) clearTimeout(foxyTimer);
-  
-  if (foxyClickCount >= 5) {
-    // TRIGGER SPIN!
-    avatar.classList.add('foxy-spin');
+  if (ZenClickCount >= 5) {
+    avatar.classList.add('zen-spin');
     playDingDongSound();
-    updateFoxyMessage("Wheeeee! I'm spinning! Hahaha! 🦊✨");
-    
+    updateZenMessage("Wheeeee! I'm spinning! Hahaha! \u{1F98A}\u{2728}");
     setTimeout(() => {
-      avatar.classList.remove('foxy-spin');
-      foxyClickCount = 0;
+      avatar.classList.remove('zen-spin');
+      ZenClickCount = 0;
     }, 1000);
   } else {
-    // Reset if no clicks for 2 seconds
-    foxyTimer = setTimeout(() => {
-      foxyClickCount = 0;
-    }, 2000);
-    
-    // Tiny bounce on click
+    ZenTimer = setTimeout(() => { ZenClickCount = 0; }, 2000);
     avatar.style.transform = 'scale(1.2)';
     setTimeout(() => { avatar.style.transform = ''; }, 150);
     playPopSound();
@@ -1221,12 +983,10 @@ function foxyEasterEgg() {
 function starEasterEgg(el) {
   playPopSound();
   el.classList.add('star-pop');
-  
-  // Create tiny confetti effect
   const rect = el.getBoundingClientRect();
   for (let i = 0; i < 5; i++) {
     const p = document.createElement('div');
-    p.textContent = ['✨','⭐','🌟','🎈'][Math.floor(Math.random()*4)];
+    p.textContent = ['\u2728','\u2B50','\u{1F31F}','\u{1F388}'][Math.floor(Math.random()*4)];
     p.style.position = 'fixed';
     p.style.left = rect.left + rect.width/2 + 'px';
     p.style.top = rect.top + rect.height/2 + 'px';
@@ -1235,16 +995,193 @@ function starEasterEgg(el) {
     p.style.fontSize = '1.2rem';
     p.style.transition = 'all 0.8s ease-out';
     document.body.appendChild(p);
-    
     setTimeout(() => {
       const angle = Math.random() * Math.PI * 2;
       const dist = 50 + Math.random() * 50;
       p.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px) rotate(${Math.random()*360}deg)`;
       p.style.opacity = '0';
     }, 10);
-    
     setTimeout(() => p.remove(), 1000);
   }
-  
   setTimeout(() => { el.classList.remove('star-pop'); }, 400);
 }
+
+// ===== INTRO OVERLAY =====
+let currentIntroSlide = 1;
+const totalIntroSlides = 4;
+
+function showIntroGuide() {
+  const overlay = document.getElementById('intro-overlay');
+  if (overlay) {
+    overlay.style.display = 'flex';
+    currentIntroSlide = 1;
+    updateIntroSlide();
+  }
+}
+
+function updateIntroSlide() {
+  document.querySelectorAll('.intro-slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.intro-step-dot').forEach(d => d.classList.remove('active'));
+  const slide = document.getElementById('islide-' + currentIntroSlide);
+  const dot = document.getElementById('idot-' + currentIntroSlide);
+  if(slide) slide.classList.add('active');
+  if(dot) dot.classList.add('active');
+  const prevBtn = document.getElementById('intro-prev');
+  const nextBtn = document.getElementById('intro-next');
+  if(prevBtn) prevBtn.style.visibility = (currentIntroSlide === 1) ? 'hidden' : 'visible';
+  if(nextBtn) nextBtn.style.display = (currentIntroSlide === totalIntroSlides) ? 'none' : 'inline-block';
+}
+
+function introNext() {
+  if (currentIntroSlide < totalIntroSlides) {
+    currentIntroSlide++;
+    updateIntroSlide();
+  }
+}
+
+function introPrev() {
+  if (currentIntroSlide > 1) {
+    currentIntroSlide--;
+    updateIntroSlide();
+  }
+}
+
+function jumpToIntroSlide(n) {
+  currentIntroSlide = n;
+  updateIntroSlide();
+}
+
+function dismissIntro() {
+  const overlay = document.getElementById('intro-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Initializations
+  loadProgress();
+  initCanvas();
+  initChallengeCanvas();
+  loadVocabRound();
+
+  // 2. Intro Guide Logic
+  if (!sessionStorage.getItem('introSeen')) {
+    setTimeout(showIntroGuide, 800);
+    sessionStorage.setItem('introSeen', 'true');
+  }
+  
+  // 3. Zen Mascot
+  if (typeof ZenController !== 'undefined') {
+    zenApp = new ZenController();
+  }
+});
+
+// ===== LESSON PLAN TABS =====
+function showLPTab(tabId, btnElement) {
+  document.querySelectorAll('.lp-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.lp-tab').forEach(b => b.classList.remove('active'));
+  const target = document.getElementById('lp-' + tabId);
+  if(target) target.classList.add('active');
+  if(btnElement) btnElement.classList.add('active');
+}
+
+function sendLPMessage() {
+  const type = document.getElementById('lp-msg-type').value;
+  const text = document.getElementById('lp-msg-text').value.trim();
+  const success = document.getElementById('lp-msg-success');
+  if(!type || !text) {
+    alert("Please select a topic and write a message.");
+    return;
+  }
+  success.classList.remove('hidden');
+  document.getElementById('lp-msg-text').value = '';
+  document.getElementById('lp-msg-type').value = '';
+  setTimeout(() => { success.classList.add('hidden'); }, 4000);
+}
+
+// ===== ZEN CONTROLLER =====
+class ZenController {
+  constructor() {
+    this.container = document.getElementById('zen-floating-guide');
+    this.mainImg = document.getElementById('zen-main-img');
+    if (!this.mainImg) return;
+    this.isSleeping = false;
+    this.isInteracting = false;
+    this.idleTime = 0;
+    this.originalSrc = this.mainImg.src;
+    this.sleepSrc = 'zen_sleep.png';
+    this.init();
+  }
+  init() {
+    document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+    document.addEventListener('click', () => this.wakeUp());
+    setInterval(() => this.checkInactivity(), 1000);
+    this.startBlinking();
+    this.moveTo('right: 2rem; bottom: 2rem;');
+  }
+  handleMouseMove(e) {
+    this.idleTime = 0;
+    if (this.isSleeping) this.wakeUp();
+    const rect = this.mainImg.getBoundingClientRect();
+    const zenX = rect.left + rect.width / 2;
+    const zenY = rect.top + rect.height / 2;
+    const dx = e.clientX - zenX;
+    const dy = e.clientY - zenY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const maxTilt = dist < 200 ? 25 : 15;
+    const dampen = Math.min(dist / 500, 1);
+    const tx = -(dy / dist || 0) * maxTilt * dampen;
+    const ty = (dx / dist || 0) * maxTilt * dampen;
+    this.mainImg.style.transform = `perspective(600px) rotateX(${tx}deg) rotateY(${ty}deg)`;
+    if (dist < 80 && !this.isInteracting) this.dashAway();
+  }
+  startBlinking() {
+    const blink = () => {
+      if (!this.isSleeping) {
+        this.mainImg.style.transform += ' scaleY(0.1)';
+        setTimeout(() => { this.mainImg.style.transform = this.mainImg.style.transform.replace(' scaleY(0.1)', ''); }, 100);
+      }
+      setTimeout(blink, Math.random() * 5000 + 2000);
+    };
+    blink();
+  }
+  hideInCorner() {
+    const corners = ['left: 2rem; bottom: 2rem;', 'right: 2rem; bottom: 2rem;', 'right: 2rem; top: 6rem;'];
+    this.moveTo(corners[Math.floor(Math.random() * corners.length)]);
+  }
+  dashAway() {
+    this.isInteracting = true;
+    this.triggerReaction('surprised');
+    this.hideInCorner();
+    setTimeout(() => { this.isInteracting = false; }, 2000);
+  }
+  moveTo(cssText) {
+    this.container.style.cssText = `position: fixed; z-index: 5000; pointer-events: none; transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); ${cssText}`;
+  }
+  checkInactivity() {
+    this.idleTime++;
+    if (this.idleTime >= 10 && !this.isSleeping) this.fallAsleep();
+  }
+  fallAsleep() {
+    this.isSleeping = true;
+    this.container.classList.add('zen-sleeping');
+    this.mainImg.src = this.sleepSrc;
+    const zzz = this.container.querySelector('.zen-sleep-z');
+    if(zzz) zzz.style.opacity = '1';
+    this.moveTo('right: 2rem; bottom: 2rem;');
+  }
+  wakeUp() {
+    if (!this.isSleeping) return;
+    this.isSleeping = false;
+    this.container.classList.remove('zen-sleeping');
+    this.mainImg.src = this.originalSrc;
+    const zzz = this.container.querySelector('.zen-sleep-z');
+    if(zzz) zzz.style.opacity = '0';
+    this.triggerReaction('surprised');
+    this.idleTime = 0;
+  }
+  triggerReaction(type) {
+    this.container.classList.add(`zen-${type}`);
+    setTimeout(() => { this.container.classList.remove(`zen-${type}`); }, 2000);
+  }
+}
+let zenApp;

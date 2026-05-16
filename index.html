@@ -1,31 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🌞 Grade 3 Fun Learning | English Adventures</title>
-  <meta name="description" content="Interactive Grade 3 English learning with writing, drawing, reading, and speaking activities. Fun and engaging for young learners!" />
+  <meta name="description"
+    content="Interactive Grade 3 English learning with writing, drawing, reading, and speaking activities. Fun and engaging for young learners!" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
+  <!-- ===== ZEN REUSABLE SVG DEFS ===== -->
+  <svg width="0" height="0" style="position:absolute; width:0; height:0; pointer-events:none; z-index:-1;" aria-hidden="true">
+    <symbol id="zen-mascot" viewBox="0 0 120 148" overflow="visible">
+      <defs>
+        <radialGradient id="zBG" cx="42%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#FFBA7A" />
+          <stop offset="100%" stop-color="#E8722E" />
+        </radialGradient>
+        <radialGradient id="zEye" cx="38%" cy="35%" r="60%">
+          <stop offset="0%" stop-color="#3D2200" />
+          <stop offset="100%" stop-color="#160800" />
+        </radialGradient>
+      </defs>
+      
+      <g class="zen-body-group">
+        <!-- Tail -->
+        <g class="zen-tail-group">
+          <ellipse cx="95" cy="108" rx="35" ry="25" fill="#E8722E" transform="rotate(-25 95 108)" />
+          <ellipse cx="108" cy="95" rx="18" ry="12" fill="#FFF2E0" transform="rotate(-25 108 95)" />
+        </g>
+        <!-- Body & Paws -->
+        <ellipse cx="55" cy="112" rx="27" ry="23" fill="url(#zBG)" />
+        <ellipse cx="55" cy="117" rx="17" ry="15" fill="#FFF2E0" />
+        <ellipse cx="37" cy="132" rx="11" ry="7" fill="#E8722E" />
+        <ellipse cx="73" cy="132" rx="11" ry="7" fill="#E8722E" />
+      </g>
+      
+      <g class="zen-head-group">
+        <!-- Ears -->
+        <g class="zen-ears">
+          <g class="zen-ear-left">
+            <polygon points="18,40 5,0 43,30" fill="#E8722E" />
+            <polygon points="22,38 10,8 40,29" fill="#FFF2E0" />
+          </g>
+          <g class="zen-ear-right">
+            <polygon points="92,40 105,0 67,30" fill="#E8722E" />
+            <polygon points="88,38 100,8 70,29" fill="#FFF2E0" />
+          </g>
+        </g>
+        <!-- Head Base -->
+        <circle cx="55" cy="58" r="38" fill="url(#zBG)" />
+        <ellipse cx="55" cy="68" rx="23" ry="18" fill="#FFF2E0" />
+        <!-- Cheeks -->
+        <circle cx="31" cy="69" r="8" fill="#FFB3C6" opacity="0.4" />
+        <circle cx="79" cy="69" r="8" fill="#FFB3C6" opacity="0.4" />
+        
+        <!-- Eyes -->
+        <g class="zen-eyes-group">
+          <g class="zen-eye zen-eye-left">
+            <circle cx="41" cy="56" r="10" fill="url(#zEye)" />
+            <circle class="zen-pupil" cx="44" cy="52" r="4.5" fill="white" />
+            <circle cx="38" cy="60" r="2" fill="#A2D2FF" opacity="0.8" />
+          </g>
+          <g class="zen-eye zen-eye-right">
+            <circle cx="69" cy="56" r="10" fill="url(#zEye)" />
+            <circle class="zen-pupil" cx="72" cy="52" r="4.5" fill="white" />
+            <circle cx="66" cy="60" r="2" fill="#A2D2FF" opacity="0.8" />
+          </g>
+        </g>
+        <!-- Sleep Eyelids (hidden by default) -->
+        <g class="zen-eyelids" opacity="0">
+          <path d="M 31 56 Q 41 62 51 56" stroke="#8B5A2B" stroke-width="2.5" fill="none" stroke-linecap="round" />
+          <path d="M 59 56 Q 69 62 79 56" stroke="#8B5A2B" stroke-width="2.5" fill="none" stroke-linecap="round" />
+        </g>
+        <!-- Nose & Mouth -->
+        <ellipse cx="55" cy="68" rx="4.5" ry="3" fill="#8B5A2B" />
+        <ellipse cx="53.5" cy="67" rx="1.8" ry="1.2" fill="white" opacity="0.6" />
+        <path class="zen-mouth" d="M50 74 Q55 79 60 74" stroke="#8B5A2B" stroke-width="2" fill="none" stroke-linecap="round" />
+        
+        <!-- Scarf -->
+        <g class="zen-scarf-group">
+          <path d="M22 88 Q55 80 88 88" stroke="#7C3AED" stroke-width="12" stroke-linecap="round" fill="none" />
+          <path d="M22 88 Q55 80 88 88" stroke="#A2D2FF" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.5" />
+          <circle cx="55" cy="87" r="8" fill="#A2D2FF" />
+          <path class="zen-scarf-tail" d="M53 92 Q48 112 45 120" stroke="#7C3AED" stroke-width="8" stroke-linecap="round" fill="none" />
+        </g>
+      </g>
+      
+      <!-- Particles -->
+      <g class="zen-particles">
+        <circle class="zp p1" cx="0" cy="30" r="3" fill="#FCD34D" opacity="0"/>
+        <circle class="zp p2" cx="110" cy="15" r="2.5" fill="#A2D2FF" opacity="0"/>
+        <circle class="zp p3" cx="0" cy="80" r="2" fill="#F9A8D4" opacity="0"/>
+        <circle class="zp p4" cx="115" cy="80" r="2.5" fill="#6EE7B7" opacity="0"/>
+      </g>
+      
+      <!-- Sleep Zzz -->
+      <g class="zen-sleep-z" opacity="0">
+        <text x="85" y="25" font-family="Nunito" font-weight="800" font-size="14" fill="#A2D2FF" class="zz1">Z</text>
+        <text x="100" y="10" font-family="Nunito" font-weight="800" font-size="18" fill="#C4B5FD" class="zz2">Z</text>
+      </g>
+    </symbol>
+  </svg>
   <!-- ===== NAV ===== -->
   <nav class="navbar" id="navbar">
-    <div class="nav-logo">🌞 Grade 3</div>
+    <div class="nav-logo">🌟 Grade 3</div>
     <div class="nav-links">
       <button class="nav-btn" onclick="showSection('home')">🏠 Home</button>
       <button class="nav-btn" onclick="showSection('characters')">👫 Characters</button>
       <button class="nav-btn" onclick="showSection('menu')">🚀 Activities</button>
       <button class="nav-btn" onclick="showSection('challenge')">🌟 Challenges</button>
-      <button class="nav-btn" onclick="showSection('planning')">📋 Planning</button>
-      <button class="nav-btn hidden" id="nav-cert-btn" style="color:#fb923c;font-weight:900;" onclick="showCertificateModal()">🏆 Certificate</button>
-      <button class="nav-btn theme-toggle" onclick="toggleTheme()" id="theme-btn" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 0.4rem 1rem; margin-left: 0.5rem; font-weight: 800; cursor: pointer; transition: all 0.3s; color: #fcd34d;">☀️ Day Mode</button>
+      <button class="nav-btn" onclick="showSection('lesson-plan')">📚 Lesson Plan</button>
+      <button class="nav-btn" onclick="showIntroGuide()">📋 Our Guide</button>
+      <button class="nav-btn hidden" id="nav-cert-btn" style="color:#fb923c;font-weight:900;"
+        onclick="showCertificateModal()">🏆 Certificate</button>
+      <button class="nav-btn theme-toggle" onclick="toggleTheme()" id="theme-btn"
+        style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 0.4rem 1rem; margin-left: 0.5rem; font-weight: 800; cursor: pointer; transition: all 0.3s; color: #fcd34d;">☀️
+        Day Mode</button>
     </div>
-    <div class="foxy-progress" id="foxy-progress" onclick="checkMissingStars()">
-      <span class="foxy-emoji">🦊</span> <span class="foxy-nav-text">Foxy's Journey:</span> <span id="foxy-stars-count">0</span>/6 ⭐
+    <div class="zen-progress" id="zen-progress" onclick="checkMissingStars()">
+      <img src="zen_mascot.png" class="zen-icon-img zen-icon-nav" alt="Zen"> <span class="zen-nav-text">Zen's Journey:</span> <span
+        id="zen-stars-count">0</span> / 6 ⭐
     </div>
     <div class="nav-hamburger" onclick="toggleMobileNav()" id="hamburger">☰</div>
   </nav>
@@ -45,8 +147,8 @@
       </div>
       <div class="hero-content">
         <div class="hero-badge">✨ English for Kids</div>
-        <h1 class="hero-title">🌞 Welcome to our<br/><span class="gradient-text">world of fun learning!</span></h1>
-        <p class="hero-subtitle">Learning English is fun!<br/>Games, creativity & communication!</p>
+        <h1 class="hero-title">🌟 Welcome to our<br /><span class="gradient-text">world of fun learning!</span></h1>
+        <p class="hero-subtitle">Learning English is fun!<br />Games, creativity & communication!</p>
         <div class="hero-icons">
           <div class="hero-icon-card">
             <span class="icon-big">✍️</span>
@@ -79,10 +181,10 @@
           <div class="kid kid2">👧</div>
           <div class="kid kid3">👦</div>
           <div class="scene-items">
-            <span class="item pencil">✏️</span>
-            <span class="item book">📚</span>
+            <span class="item pencil">✍️</span>
+            <span class="item book">📖</span>
             <span class="item star">⭐</span>
-            <span class="item paint">🖌️</span>
+            <span class="item paint">🎨</span>
           </div>
         </div>
       </div>
@@ -93,7 +195,7 @@
   <!-- ===== SECTION 2: CHARACTERS ===== -->
   <section id="characters" class="section">
     <div class="section-header">
-      <h2>👫 Meet the Characters!</h2>
+      <h2>👥 Meet the Characters!</h2>
       <p>Your friends on this learning adventure</p>
     </div>
     <div class="characters-grid">
@@ -110,14 +212,20 @@
         <div class="activity-box">
           <p class="activity-question">🤔 What do you like?</p>
           <div class="like-options">
-            <button class="like-btn" id="like-games" onclick="selectLike(this,'🎮 Games are awesome!')">🎮 I like games</button>
-            <button class="like-btn" id="like-drawing" onclick="selectLike(this,'🎨 Drawing is creative!')">🎨 I like drawing</button>
-            <button class="like-btn" id="like-reading" onclick="selectLike(this,'📖 Reading is wonderful!')">📖 I like reading</button>
+            <button class="like-btn" id="like-games" onclick="selectLike(this,'🎮 Games are awesome!')">🎮 I like
+              games</button>
+            <button class="like-btn" id="like-drawing" onclick="selectLike(this,'🎨 Drawing is creative!')">🎨 I like
+              drawing</button>
+            <button class="like-btn" id="like-reading" onclick="selectLike(this,'📖 Reading is wonderful!')">📖 I like
+              reading</button>
           </div>
           <div id="laura-response" class="laura-response hidden"></div>
         </div>
-        <button class="btn-character laura-btn" style="margin-top:0.8rem; background: linear-gradient(135deg, #7c3aed, #a855f7); color: white;" onclick="helloLaura()">👋 Hello Laura!</button>
-        <div id="laura-hello-response" class="character-response hidden" style="margin-top:0.5rem">✨ Hello, dear student! Ready to learn? 🌟</div>
+        <button class="btn-character laura-btn"
+          style="margin-top:0.8rem; background: linear-gradient(135deg, #7c3aed, #a855f7); color: white;"
+          onclick="helloLaura()">👋 Hello Laura!</button>
+        <div id="laura-hello-response" class="character-response hidden" style="margin-top:0.5rem">✨ Hello, dear
+          student! Ready to learn? 🌟</div>
       </div>
 
       <!-- DANNY -->
@@ -129,19 +237,25 @@
         <h3 class="character-name">DANNY</h3>
         <p class="character-subtitle">Let's learn together!</p>
         <div class="daniel-options">
-          <button class="daniel-btn" id="sing-btn" onclick="danielActivity('🎵 La la la! Great singing!')">🎵 Sing a song</button>
-          <button class="daniel-btn" id="draw-btn" onclick="danielActivity('🎨 Beautiful drawing!')">🎨 Draw something</button>
-          <button class="daniel-btn" id="write-btn" onclick="danielActivity('✏️ Excellent writing!')">✏️ Write a sentence</button>
+          <button class="daniel-btn" id="sing-btn" onclick="danielActivity('🎵 La la la! Great singing!')">🎵 Sing a
+            song</button>
+          <button class="daniel-btn" id="draw-btn" onclick="danielActivity('🎨 Beautiful drawing!')">🎨 Draw
+            something</button>
+          <button class="daniel-btn" id="write-btn" onclick="danielActivity('✍️ Excellent writing!')">✍️ Write a
+            sentence</button>
         </div>
         <div id="daniel-response" class="daniel-response hidden"></div>
-        <button class="btn-character daniel-btn" style="margin-top:0.8rem; background: linear-gradient(135deg, #10b981, #059669); color: white;" onclick="helloDanny()">👋 Hello Danny!</button>
-        <div id="danny-hello-response" class="character-response hidden" style="margin-top:0.5rem">✨ Hey there! Let's get started! 🚀</div>
+        <button class="btn-character daniel-btn"
+          style="margin-top:0.8rem; background: linear-gradient(135deg, #10b981, #059669); color: white;"
+          onclick="helloDanny()">👋 Hello Danny!</button>
+        <div id="danny-hello-response" class="character-response hidden" style="margin-top:0.5rem">✨ Hey there! Let's
+          get started! 🚀</div>
       </div>
 
     </div>
 
     <div class="section-footer">
-      <button class="btn-primary" onclick="showSection('menu')" id="go-activities-btn">🚀 Go to Activities ➡️</button>
+      <button class="btn-primary" onclick="showSection('menu')" id="go-activities-btn">🚀 Go to Activities ➡️ </button>
     </div>
   </section>
 
@@ -161,7 +275,7 @@
     </div>
     <div class="menu-grid">
       <button class="menu-card writing-card" onclick="showActivity('writing')" id="menu-writing">
-        <span class="menu-icon">✏️</span>
+        <span class="menu-icon">✍️</span>
         <span class="menu-label">Writing</span>
         <span class="menu-desc">Express your ideas!</span>
       </button>
@@ -196,7 +310,7 @@
   <!-- ===== SECTION 4a: WRITING ACTIVITY ===== -->
   <section id="activity-writing" class="section activity-section">
     <div class="activity-header writing-header">
-      <h2>✏️ Let's Write!</h2>
+      <h2>✍️ Let's Write!</h2>
     </div>
     <div class="activity-content">
       <div class="animal-display">
@@ -220,20 +334,20 @@
       <div class="sentences-input">
         <div class="sentence-row">
           <span class="sentence-num">1.</span>
-          <input type="text" id="sentence1" class="sentence-input" placeholder="It is a..." maxlength="80"/>
+          <input type="text" id="sentence1" class="sentence-input" placeholder="It is a..." maxlength="80" />
         </div>
         <div class="sentence-row">
           <span class="sentence-num">2.</span>
-          <input type="text" id="sentence2" class="sentence-input" placeholder="It is..." maxlength="80"/>
+          <input type="text" id="sentence2" class="sentence-input" placeholder="It is..." maxlength="80" />
         </div>
         <div class="sentence-row">
           <span class="sentence-num">3.</span>
-          <input type="text" id="sentence3" class="sentence-input" placeholder="It can..." maxlength="80"/>
+          <input type="text" id="sentence3" class="sentence-input" placeholder="It can..." maxlength="80" />
         </div>
       </div>
       <div class="activity-actions">
         <button class="btn-check" onclick="checkWriting()" id="check-writing-btn">✅ Check my sentences</button>
-        <button class="btn-change-animal" onclick="changeAnimal()" id="change-animal-btn">🔀 Change animal</button>
+        <button class="btn-change-animal" onclick="changeAnimal()" id="change-animal-btn">🔄 Change animal</button>
       </div>
       <div id="writing-feedback" class="feedback-box hidden"></div>
     </div>
@@ -258,7 +372,8 @@
             <button class="color-btn" style="background:#c77dff" onclick="setColor('#c77dff')" title="Purple"></button>
             <button class="color-btn" style="background:#ff9a3c" onclick="setColor('#ff9a3c')" title="Orange"></button>
             <button class="color-btn" style="background:#333" onclick="setColor('#333')" title="Black"></button>
-            <button class="color-btn" style="background:#fff;border:2px solid #ccc" onclick="setColor('#fff')" title="Eraser"></button>
+            <button class="color-btn" style="background:#fff;border:2px solid #ccc" onclick="setColor('#fff')"
+              title="Eraser"></button>
           </div>
           <div class="brush-sizes">
             <button class="size-btn" onclick="setBrush(4)" id="size-sm">S</button>
@@ -272,11 +387,11 @@
       <div class="sentences-input">
         <div class="sentence-row">
           <span class="sentence-num">1.</span>
-          <input type="text" id="draw-sentence1" class="sentence-input" placeholder="This is my..." maxlength="80"/>
+          <input type="text" id="draw-sentence1" class="sentence-input" placeholder="This is my..." maxlength="80" />
         </div>
         <div class="sentence-row">
           <span class="sentence-num">2.</span>
-          <input type="text" id="draw-sentence2" class="sentence-input" placeholder="It is..." maxlength="80"/>
+          <input type="text" id="draw-sentence2" class="sentence-input" placeholder="It is..." maxlength="80" />
         </div>
       </div>
       <div class="example-box">
@@ -296,18 +411,18 @@
     </div>
     <div class="activity-content">
       <div class="story-card">
-        <div class="story-icon">🐕</div>
+        <div class="story-icon">🐶</div>
         <p class="story-text">
           Tom has a <strong>dog</strong>. The dog is <strong>brown</strong>. It is very <strong>friendly</strong>.
         </p>
       </div>
       <div class="questions-section">
-        <h3>📝 Answer the questions:</h3>
+        <h3>📍 Answer the questions:</h3>
         <div class="question-block" id="q1-block">
           <p class="question">1. What is it?</p>
           <div class="answer-options">
             <button class="answer-btn" onclick="checkAnswer(1,'a')" id="q1a">🐱 A cat</button>
-            <button class="answer-btn" onclick="checkAnswer(1,'b')" id="q1b">🐕 A dog</button>
+            <button class="answer-btn" onclick="checkAnswer(1,'b')" id="q1b">🐶 A dog</button>
             <button class="answer-btn" onclick="checkAnswer(1,'c')" id="q1c">🐦 A bird</button>
           </div>
           <div id="q1-result" class="answer-result hidden"></div>
@@ -317,7 +432,7 @@
           <div class="answer-options">
             <button class="answer-btn" onclick="checkAnswer(2,'a')" id="q2a">⚫ Black</button>
             <button class="answer-btn" onclick="checkAnswer(2,'b')" id="q2b">🟤 Brown</button>
-            <button class="answer-btn" onclick="checkAnswer(2,'c')" id="q2c">⬜ White</button>
+            <button class="answer-btn" onclick="checkAnswer(2,'c')" id="q2c">⚪ White</button>
           </div>
           <div id="q2-result" class="answer-result hidden"></div>
         </div>
@@ -408,13 +523,14 @@
         </div>
       </div>
 
-      <p class="activity-instruction">Match each <span class="highlight-word">word</span> to the correct <span class="highlight-img">picture</span>!</p>
+      <p class="activity-instruction">Match each <span class="highlight-word">word</span> to the correct <span
+          class="highlight-img">picture</span>!</p>
 
       <!-- Game Board -->
       <div class="vocab-game-board" id="vocab-game-board">
         <!-- Words column -->
         <div class="vocab-column words-column" id="words-column">
-          <div class="vocab-col-title">📝 Words</div>
+          <div class="vocab-col-title">&#128205; Words</div>
           <!-- Injected by JS -->
         </div>
 
@@ -425,7 +541,7 @@
 
         <!-- Images column -->
         <div class="vocab-column images-column" id="images-column">
-          <div class="vocab-col-title">🖼️ Pictures</div>
+          <div class="vocab-col-title">&#128444;&#65039; Pictures</div>
           <!-- Injected by JS -->
         </div>
       </div>
@@ -436,7 +552,8 @@
       <!-- Action buttons -->
       <div class="vocab-actions">
         <button class="btn-check" id="vocab-check-btn" onclick="checkVocabMatches()">✅ Check Matches!</button>
-        <button class="btn-change-animal" id="vocab-next-btn" onclick="loadVocabRound()" style="display:none;">🔀 Next Round!</button>
+        <button class="btn-change-animal" id="vocab-next-btn" onclick="loadVocabRound()" style="visibility:hidden;">🔄 Next
+          Round!</button>
       </div>
 
       <!-- How to play hint -->
@@ -457,7 +574,7 @@
     <div class="challenge-grid">
 
       <div class="challenge-card writing-challenge">
-        <div class="challenge-icon">✏️</div>
+        <div class="challenge-icon">✍️</div>
         <h3>Writing Challenge</h3>
         <p>Write 4 sentences about your best friend</p>
         <div class="challenge-input-group">
@@ -466,7 +583,8 @@
           <input type="text" class="challenge-input" id="ch3" placeholder="Sentence 3..." />
           <input type="text" class="challenge-input" id="ch4" placeholder="Sentence 4..." />
         </div>
-        <button class="btn-challenge-submit" onclick="submitWritingChallenge()" id="submit-writing-challenge">✅ Submit!</button>
+        <button class="btn-challenge-submit" onclick="submitWritingChallenge()" id="submit-writing-challenge">✅
+          Submit!</button>
         <div id="writing-challenge-result" class="feedback-box hidden"></div>
       </div>
 
@@ -483,12 +601,14 @@
             <button class="color-btn sm" style="background:#4d96ff" onclick="setChallengeColor('#4d96ff')"></button>
             <button class="color-btn sm" style="background:#c77dff" onclick="setChallengeColor('#c77dff')"></button>
             <button class="color-btn sm" style="background:#333" onclick="setChallengeColor('#333')"></button>
-            <button class="color-btn sm" style="background:#fff;border:2px solid #ccc" onclick="setChallengeColor('#fff')"></button>
+            <button class="color-btn sm" style="background:#fff;border:2px solid #ccc"
+              onclick="setChallengeColor('#fff')"></button>
           </div>
           <button class="btn-clear sm" onclick="clearChallengeCanvas()" id="clear-challenge-canvas">🗑️</button>
         </div>
         <input type="text" class="challenge-input" id="dream-place-desc" placeholder="Describe your dream place..." />
-        <button class="btn-challenge-submit" onclick="submitDrawingChallenge()" id="submit-drawing-challenge">🎉 Share it!</button>
+        <button class="btn-challenge-submit" onclick="submitDrawingChallenge()" id="submit-drawing-challenge">🎉 Share
+          it!</button>
         <div id="drawing-challenge-result" class="feedback-box hidden"></div>
       </div>
 
@@ -521,64 +641,599 @@
     <button class="btn-back" onclick="showSection('menu')" id="back-from-challenge">🔙 Back to menu</button>
   </section>
 
-  <!-- ===== SECTION 6: PLANNING ===== -->
-  <section id="planning" class="section">
-    <div class="section-header">
-      <h2>📋 Instructional Map</h2>
-      <p>Pedagogical backbone of the English Adventures VLE</p>
+  <!-- ===== SECTION: LESSON PLAN ===== -->
+  <section id="lesson-plan" class="section lp-section">
+
+    <!-- Header -->
+    <div class="lp-hero">
+      <div class="lp-hero-badge">📚 Grade 3 · English Adventures VLE</div>
+      <h1 class="lp-hero-title">Lesson Plan &amp; <span class="lp-gradient">Instructional Design</span></h1>
+      <p class="lp-hero-sub">A theoretically grounded Virtual Learning Environment for young learners</p>
     </div>
-    
-    <div class="planning-container">
-      
-      <!-- Section 1: What is an Instructional Map? -->
-      <div class="planning-card kid-friendly-card">
-        <div class="foxy-tip-bubble">
-          🦊 <strong>Foxy says:</strong> A map helps us find the way!
+
+    <div class="lp-container">
+
+      <!-- ── TAB NAVIGATION ── -->
+      <div class="lp-tabs" id="lp-tabs">
+        <button class="lp-tab active" onclick="showLPTab('overview',this)">🗺️ Overview</button>
+        <button class="lp-tab" onclick="showLPTab('sequence',this)">📅 Didactic Sequence</button>
+        <button class="lp-tab" onclick="showLPTab('theory',this)">🧠 Theoretical Framework</button>
+        <button class="lp-tab" onclick="showLPTab('contact',this)">✉️ Contact</button>
+      </div>
+
+      <!-- ═════════════════════════════════ TAB 1: OVERVIEW ═════════════════════════════════ -->
+      <div class="lp-panel active" id="lp-overview">
+
+        <!-- General Info -->
+        <div class="lp-card lp-info-grid">
+          <div class="lp-info-item"><span class="lp-info-label">🏫 Institution</span><span
+              class="lp-info-val">Universidad de Medellín / Amigo</span></div>
+          <div class="lp-info-item"><span class="lp-info-label">📖 Subject</span><span class="lp-info-val">English as a
+              Foreign Language</span></div>
+          <div class="lp-info-item"><span class="lp-info-label">🎓 Grade</span><span class="lp-info-val">Grade 3
+              (Primary)</span></div>
+          <div class="lp-info-item"><span class="lp-info-label">👶 Age Range</span><span class="lp-info-val">8 – 9 years
+              old</span></div>
+          <div class="lp-info-item"><span class="lp-info-label">⏳ Duration</span><span class="lp-info-val">3 weeks · 1
+              session/week</span></div>
+          <div class="lp-info-item"><span class="lp-info-label">💻 Format</span><span class="lp-info-val">Virtual
+              Learning Environment (VLE)</span></div>
         </div>
-        <h3>What is an Instructional Map?</h3>
-        <p class="kid-intro">Imagine you go to a new city without a map or GPS. You would feel lost, right? <strong>An instructional map is like a GPS for your learning journey.</strong></p>
-        <p class="kid-intro">It helps you understand what you will learn, what you need to do, and how you will complete your activities!</p>
-        
-        <div class="kid-blocks-grid">
-          <div class="kid-block obj-block">
-            <span class="block-icon">🎯</span>
-            <h4>Objectives</h4>
-            <p><strong>Where are we going?</strong></p>
-            <ul>
-              <li>Learn to write simple sentences</li>
-              <li>Practice speaking and reading</li>
-            </ul>
-          </div>
-          
-          <div class="kid-block act-block">
-            <span class="block-icon">🚀</span>
-            <h4>Activities</h4>
-            <p><strong>What will we do?</strong></p>
-            <div class="icons-list">
-              <span>✏️ Writing</span>
-              <span>🎨 Drawing</span>
-              <span>📖 Reading</span>
-              <span>💬 Speaking</span>
-              <span>🎮 Vocabulary game</span>
+
+        <!-- Objectives -->
+        <div class="lp-card">
+          <div class="lp-card-title">🎯 Learning Objectives</div>
+          <div class="lp-objectives">
+            <div class="lp-obj-item lp-obj-gen">
+              <span class="lp-obj-badge">General</span>
+              <p>Students will develop basic English literacy and oral communication skills through multimodal, gamified
+                activities aligned with A1 CEFR level descriptors.</p>
+            </div>
+            <div class="lp-obj-specifics">
+              <div class="lp-spec-item"><span class="lp-spec-icon">✍️</span>
+                <div><strong>Writing:</strong> Produce 3 descriptive sentences about animals using target vocabulary.
+                </div>
+              </div>
+              <div class="lp-spec-item"><span class="lp-spec-icon">🎨</span>
+                <div><strong>Drawing &amp; Describing:</strong> Draw a favourite place and describe it using simple
+                  adjectives.</div>
+              </div>
+              <div class="lp-spec-item"><span class="lp-spec-icon">📖</span>
+                <div><strong>Reading:</strong> Read a short story and answer 3 comprehension questions correctly.</div>
+              </div>
+              <div class="lp-spec-item"><span class="lp-spec-icon">💬</span>
+                <div><strong>Speaking:</strong> Speak for 30 seconds about a favourite animal using modelled sentence
+                  frames.</div>
+              </div>
+              <div class="lp-spec-item"><span class="lp-spec-icon">🎮</span>
+                <div><strong>Vocabulary:</strong> Match at least 4 words to their corresponding pictures in each game
+                  round.</div>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div class="kid-block eval-block">
-            <span class="block-icon">🏆</span>
-            <h4>Evaluation</h4>
-            <p><strong>How will you be evaluated?</strong></p>
+        <!-- Skills & Competences -->
+        <div class="lp-card">
+          <div class="lp-card-title">🧩 Skills &amp; Competences</div>
+          <div class="lp-skills-grid">
+            <div class="lp-skill-chip lp-skill-w">✍️ Writing</div>
+            <div class="lp-skill-chip lp-skill-r">📖 Reading</div>
+            <div class="lp-skill-chip lp-skill-s">💬 Speaking</div>
+            <div class="lp-skill-chip lp-skill-l">👂 Listening (passive)</div>
+            <div class="lp-skill-chip lp-skill-v">🎮 Vocabulary</div>
+            <div class="lp-skill-chip lp-skill-d">🎨 Creative expression</div>
+          </div>
+        </div>
+
+        <!-- Evaluation -->
+        <div class="lp-card">
+          <div class="lp-card-title">🏆 Evaluation Strategy</div>
+          <div class="lp-eval-table">
+            <div class="lp-eval-row lp-eval-head"><span>Component</span><span>Criteria</span><span>Weight</span></div>
+            <div class="lp-eval-row"><span>Activity completion (×5)</span><span>All fields filled, min length
+                met</span><span>50%</span></div>
+            <div class="lp-eval-row"><span>Zen Stars (6 total)</span><span>Each activity earns 1
+                star</span><span>30%</span></div>
+            <div class="lp-eval-row"><span>Final Challenge Zone</span><span>Writing + Drawing +
+                Speaking</span><span>20%</span></div>
+          </div>
+        </div>
+
+      </div><!-- /lp-overview -->
+
+      <!-- ═════════════════════════════════ TAB 2: DIDACTIC SEQUENCE ═════════════════════════════════ -->
+      <div class="lp-panel" id="lp-sequence">
+
+        <div class="lp-card">
+          <div class="lp-card-title">📅 3-Week Didactic Sequence</div>
+          <p class="lp-panel-desc">Each session follows the <strong>PPP model</strong> (Presentation → Practice →
+            Production) embedded in the VLE flow.</p>
+        </div>
+
+        <!-- Week 1 -->
+        <div class="lp-week-card lp-week1">
+          <div class="lp-week-header"><span class="lp-week-num">Week 1</span><span class="lp-week-topic">🐘 Topic:
+              Animals</span></div>
+          <div class="lp-week-body">
+            <div class="lp-week-col">
+              <strong>🎯 Focus skills</strong>
+              <ul>
+                <li>Writing</li>
+                <li>Vocabulary game</li>
+              </ul>
+            </div>
+            <div class="lp-week-col">
+              <strong>📋 Activities</strong>
+              <ul>
+                <li>Write 3 sentences about an animal</li>
+                <li>Match 4 animal words to pictures</li>
+              </ul>
+            </div>
+            <div class="lp-week-col">
+              <strong>✅ Evaluation</strong>
+              <ul>
+                <li>All 3 sentences written (min 5 chars)</li>
+                <li>All 4 vocab pairs matched</li>
+              </ul>
+            </div>
+            <div class="lp-week-col">
+              <strong>⭐ Zen Stars</strong>
+              <ul>
+                <li>Writing star</li>
+                <li>Vocabulary star</li>
+              </ul>
+            </div>
+          </div>
+          <div class="lp-week-deadline">📍 Deadline: End of Week 1 · Friday</div>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="lp-week-card lp-week2">
+          <div class="lp-week-header"><span class="lp-week-num">Week 2</span><span class="lp-week-topic">🌍 Topic: My
+              World</span></div>
+          <div class="lp-week-body">
+            <div class="lp-week-col">
+              <strong>🎯 Focus skills</strong>
+              <ul>
+                <li>Drawing &amp; describing</li>
+                <li>Reading comprehension</li>
+              </ul>
+            </div>
+            <div class="lp-week-col">
+              <strong>📋 Activities</strong>
+              <ul>
+                <li>Draw a place &amp; write 2 sentences</li>
+                <li>Read story, answer 3 questions</li>
+              </ul>
+            </div>
+            <div class="lp-week-col">
+              <strong>✅ Evaluation</strong>
+              <ul>
+                <li>Both sentences present</li>
+                <li>All 3 questions answered</li>
+              </ul>
+            </div>
+            <div class="lp-week-col">
+              <strong>⭐ Zen Stars</strong>
+              <ul>
+                <li>Drawing star</li>
+                <li>Reading star</li>
+              </ul>
+            </div>
+          </div>
+          <div class="lp-week-deadline">📍 Deadline: End of Week 2 · Friday</div>
+        </div>
+
+        <!-- Week 3 -->
+        <div class="lp-week-card lp-week3">
+          <div class="lp-week-header"><span class="lp-week-num">Week 3</span><span class="lp-week-topic">🌟 Topic:
+              Favourite Things &amp; Challenge</span></div>
+          <div class="lp-week-body">
+            <div class="lp-week-col">
+              <strong>🎯 Focus skills</strong>
+              <ul>
+                <li>Speaking (oral fluency)</li>
+                <li>Final Challenge Zone</li>
+              </ul>
+            </div>
+            <div class="lp-week-col">
+              <strong>📋 Activities</strong>
+              <ul>
+                <li>Speak 30 s about favourite animal</li>
+                <li>Complete all 3 challenge tasks</li>
+              </ul>
+            </div>
+            <div class="lp-week-col">
+              <strong>✅ Evaluation</strong>
+              <ul>
+                <li>Timer completes (30 s)</li>
+                <li>4 sentences + drawing + 30 s speech</li>
+              </ul>
+            </div>
+            <div class="lp-week-col">
+              <strong>⭐ Zen Stars</strong>
+              <ul>
+                <li>Speaking star</li>
+                <li>Challenge star</li>
+              </ul>
+            </div>
+          </div>
+          <div class="lp-week-deadline">📍 Deadline: End of Week 3 · Friday</div>
+        </div>
+
+        <!-- Session flow -->
+        <div class="lp-card">
+          <div class="lp-card-title">🔄 Session Flow (PPP)</div>
+          <div class="lp-ppp">
+            <div class="lp-ppp-step lp-ppp-p1">
+              <div class="lp-ppp-icon">👀</div>
+              <h4>Presentation</h4>
+              <p>Students read the intro guide (Zen's map) and meet the characters. New vocabulary is introduced
+                visually.</p>
+            </div>
+            <div class="lp-ppp-arrow">→</div>
+            <div class="lp-ppp-step lp-ppp-p2">
+              <div class="lp-ppp-icon">🏃</div>
+              <h4>Practice</h4>
+              <p>Guided activities (Writing, Reading, Vocabulary game) with scaffolded sentence frames and immediate
+                feedback.</p>
+            </div>
+            <div class="lp-ppp-arrow">→</div>
+            <div class="lp-ppp-step lp-ppp-p3">
+              <div class="lp-ppp-icon">🚀</div>
+              <h4>Production</h4>
+              <p>Students freely produce language: drawing &amp; describing, speaking for 30 s, completing the Challenge
+                Zone.</p>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /lp-sequence -->
+
+      <!-- ═════════════════════════════════ TAB 3: THEORETICAL FRAMEWORK ═════════════════════════════════ -->
+      <div class="lp-panel" id="lp-theory">
+
+        <div class="lp-card lp-theory-intro">
+          <div class="lp-card-title">🧠 Theoretical Framework &amp; Justification</div>
+          <p class="lp-panel-desc">This VLE is not designed arbitrarily. Every structural and aesthetic decision is
+            grounded in established educational and cognitive science theories. The following frameworks justify why
+            <em>English Adventures</em> works the way it does.</p>
+        </div>
+
+        <!-- Theory 1: Multimedia Learning -->
+        <div class="lp-theory-card lp-t-mayer">
+          <div class="lp-theory-header">
+            <div class="lp-theory-icon">🖼️</div>
+            <div>
+              <h3 class="lp-theory-name">Multimedia Learning Theory</h3>
+              <span class="lp-theory-author">Richard E. Mayer (2001, 2009)</span>
+            </div>
+          </div>
+          <div class="lp-theory-body">
+            <p class="lp-theory-core"><strong>Core idea:</strong> People learn more deeply from words <em>and</em>
+              pictures together than from words alone, because dual-channel processing (auditory + visual) expands
+              working memory capacity.</p>
+            <div class="lp-theory-principles">
+              <div class="lp-tp"><span class="lp-tp-badge">Multimedia Principle</span>
+                <p>Each activity combines text, emoji-based images, and interactive elements — never plain text alone.
+                  The animal emoji (🐘) in the Writing activity and the picture tiles in Vocabulary directly apply this
+                  principle.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge">Contiguity Principle</span>
+                <p>Instructions and input fields are placed immediately adjacent to each other (sentence frames beside
+                  input boxes), reducing the need for the learner to scan back and forth.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge">Signalling Principle</span>
+                <p>Numbered guide items (1, 2, 3), coloured step circles, and Zen's tip bubbles highlight the most
+                  important information, directing attention efficiently.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge">Coherence Principle</span>
+                <p>Decorative elements (floating stars, kids scene) are kept subtle (opacity ≤ 12%) so they do not
+                  compete for cognitive resources with the learning content.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Theory 2: Cognitive Load Theory -->
+        <div class="lp-theory-card lp-t-sweller">
+          <div class="lp-theory-header">
+            <div class="lp-theory-icon">🧩</div>
+            <div>
+              <h3 class="lp-theory-name">Cognitive Load Theory</h3>
+              <span class="lp-theory-author">John Sweller (1988, 1994)</span>
+            </div>
+          </div>
+          <div class="lp-theory-body">
+            <p class="lp-theory-core"><strong>Core idea:</strong> Working memory is limited. Good instructional design
+              minimises <em>extraneous</em> cognitive load (unnecessary complexity) and manages <em>intrinsic</em> load
+              (task difficulty) so learners can focus on <em>germane</em> load (schema building).</p>
+            <div class="lp-theory-principles">
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-green">Reducing Extraneous Load</span>
+                <p>A single activity is shown at a time (section-based navigation). Students cannot be confused by
+                  seeing all tasks simultaneously. The mandatory intro sequence presents context in bite-sized slides (4
+                  slides × 1 concept each).</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-green">Scaffolding Intrinsic Load</span>
+                <p>Writing uses sentence starters ("It is a ___", "It is big/small"), the Speaking activity provides
+                  visual sentence frames before the student records, and the Vocabulary game builds from Level 1 (basic
+                  objects) to Level 5 (nature). Difficulty is progressive.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-green">Promoting Germane Load</span>
+                <p>Immediate, specific feedback ("🎉 Excellent! Your 3 sentences look great!") helps learners build and
+                  refine mental schemas without delay. Zen's stars reward schema completion, reinforcing learning
+                  consolidation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Theory 3: Gamification -->
+        <div class="lp-theory-card lp-t-game">
+          <div class="lp-theory-header">
+            <div class="lp-theory-icon">🎮</div>
+            <div>
+              <h3 class="lp-theory-name">Gamification &amp; Motivational Design</h3>
+              <span class="lp-theory-author">Deterding et al. (2011) · Kapp (2012)</span>
+            </div>
+          </div>
+          <div class="lp-theory-body">
+            <p class="lp-theory-core"><strong>Core idea:</strong> Applying game-design elements (points, badges,
+              progress, narrative) in non-game contexts increases engagement, persistence, and intrinsic motivation.</p>
+            <div class="lp-theory-principles">
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-amber">Points &amp; Badges</span>
+                <p>Zen's star system (6 stars total) provides clear, collectible milestones. The Certificate of
+                  Achievement serves as the ultimate badge, creating a sense of accomplishment.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-amber">Narrative &amp; Mascot</span>
+                <p>Zen the Fox acts as a guide-character (similar to Duolingo's owl), providing a relatable narrative
+                  thread. Research shows mascots increase young learners' emotional engagement and reduce anxiety.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-amber">Immediate Feedback Loops</span>
+                <p>Sound effects (ding on correct, buzz on wrong), visual modal celebrations, and colour-coded results
+                  give learners instantaneous performance signals — a core mechanic of effective game design.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-amber">Progression &amp; Challenge</span>
+                <p>The Vocabulary game auto-advances levels and the Challenge Zone requires all prior skills together,
+                  following the game design principle of escalating difficulty to maintain flow state (Csikszentmihalyi,
+                  1990).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Theory 4: UDL -->
+        <div class="lp-theory-card lp-t-udl">
+          <div class="lp-theory-header">
+            <div class="lp-theory-icon">💡</div>
+            <div>
+              <h3 class="lp-theory-name">Universal Design for Learning (UDL)</h3>
+              <span class="lp-theory-author">CAST (2018) · Rose &amp; Meyer (2002)</span>
+            </div>
+          </div>
+          <div class="lp-theory-body">
+            <p class="lp-theory-core"><strong>Core idea:</strong> Learning environments should provide multiple means of
+              representation, action &amp; expression, and engagement to accommodate diverse learners.</p>
+            <div class="lp-theory-principles">
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-teal">Multiple Means of Representation</span>
+                <p>Content is presented visually (text + emoji), auditorily (sound feedback), and kinaesthetically
+                  (drawing canvas, click interactions), ensuring access for different learner profiles.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-teal">Multiple Means of Expression</span>
+                <p>Students can express knowledge through writing (sentences), drawing (canvas), or speaking (mic timer)
+                  — honouring the fact that children have different linguistic strengths.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-teal">Day / Night Mode</span>
+                <p>The theme toggle addresses visual accessibility, reducing strain for learners who are light-sensitive
+                  — a small but meaningful UDL accommodation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Theory 5: UI/UX & CSS Design -->
+        <div class="lp-theory-card lp-t-css">
+          <div class="lp-theory-header">
+            <div class="lp-theory-icon">💅</div>
+            <div>
+              <h3 class="lp-theory-name">UI/UX &amp; CSS Design Justification</h3>
+              <span class="lp-theory-author">Modern Web Design for Children</span>
+            </div>
+          </div>
+          <div class="lp-theory-body">
+            <p class="lp-theory-core"><strong>Core idea:</strong> Children respond best to interfaces that are vibrant, forgiving, and responsive. The CSS design uses soft geometry, high-contrast colours, and micro-animations to create an emotionally comforting and engaging environment.</p>
+            <div class="lp-theory-principles">
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-blue">Soft Geometry (Border Radius)</span>
+                <p>Sharp corners can feel corporate or harsh. The interface uses generous border-radius (e.g., 20px - 30px) on all cards, buttons, and inputs to create a friendly, "bubbly" aesthetic that feels safe for young learners.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-blue">Micro-Animations &amp; Transitions</span>
+                <p>Every interaction—hovering over buttons, selecting an animal, or completing a task—triggers a CSS transition (like scaling or color shifting). This provides immediate visual feedback, reinforcing the cause-and-effect relationship for the child.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-blue">Vibrant &amp; Curated Color Palette</span>
+                <p>The colour palette relies on carefully selected gradients (purples, oranges, teals) rather than generic primary colours. This creates a premium, magical feel (Glassmorphism effects) that elevates the perceived value of the learning experience.</p>
+              </div>
+              <div class="lp-tp"><span class="lp-tp-badge lp-tp-blue">Responsive Layouts (Flexbox/Grid)</span>
+                <p>The entire layout is fluid and adaptable. Whether accessed on a school tablet, a parent's mobile phone, or a desktop computer, CSS Grid and Flexbox ensure the pedagogical content remains accessible without horizontal scrolling or broken elements.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Summary table -->
+        <div class="lp-card lp-summary-table">
+          <div class="lp-card-title">📊 Design Decisions Summary</div>
+          <div class="lp-dt">
+            <div class="lp-dt-row lp-dt-head"><span>VLE Feature</span><span>Theoretical Basis</span></div>
+            <div class="lp-dt-row"><span>Emoji + text combined activities</span><span>Mayer — Multimedia
+                Principle</span></div>
+            <div class="lp-dt-row"><span>Sentence starters &amp; frames</span><span>Sweller — Intrinsic load
+                scaffolding</span></div>
+            <div class="lp-dt-row"><span>One section visible at a time</span><span>Sweller — Extraneous load
+                reduction</span></div>
+            <div class="lp-dt-row"><span>Zen star system + Certificate</span><span>Deterding — Points &amp;
+                badges</span></div>
+            <div class="lp-dt-row"><span>Sound effects &amp; colour feedback</span><span>Kapp — Immediate feedback
+                loops</span></div>
+            <div class="lp-dt-row"><span>Writing / Drawing / Speaking options</span><span>CAST UDL — Multiple
+                expressions</span></div>
+            <div class="lp-dt-row"><span>Intro guide before activities</span><span>Mayer — Signalling &amp;
+                sequencing</span></div>
+            <div class="lp-dt-row"><span>Vocab levels 1 → 5</span><span>Sweller + Csikszentmihalyi — Flow</span></div>
+          </div>
+        </div>
+
+        <!-- References -->
+        <div class="lp-card lp-references">
+          <div class="lp-card-title">📖 References</div>
+          <ul class="lp-ref-list">
+            <li>CAST (2018). <em>Universal Design for Learning Guidelines version 2.2.</em> Retrieved from
+              udlguidelines.cast.org</li>
+            <li>Csikszentmihalyi, M. (1990). <em>Flow: The Psychology of Optimal Experience.</em> Harper &amp; Row.</li>
+            <li>Deterding, S., Dixon, D., Khaled, R., &amp; Nacke, L. (2011). From game design elements to gamefulness:
+              Defining "gamification." <em>Proceedings of MindTrek '11.</em></li>
+            <li>Kapp, K. M. (2012). <em>The Gamification of Learning and Instruction.</em> Pfeiffer.</li>
+            <li>Mayer, R. E. (2001). <em>Multimedia Learning.</em> Cambridge University Press.</li>
+            <li>Mayer, R. E. (2009). <em>Multimedia Learning</em> (2nd ed.). Cambridge University Press.</li>
+            <li>Rose, D. H., &amp; Meyer, A. (2002). <em>Teaching Every Student in the Digital Age.</em> ASCD.</li>
+            <li>Sweller, J. (1988). Cognitive load during problem solving. <em>Cognitive Science, 12</em>(2), 257–285.
+            </li>
+            <li>Sweller, J. (1994). Cognitive load theory, learning difficulty, and instructional design. <em>Learning
+                and Instruction, 4</em>(4), 295–312.</li>
+          </ul>
+        </div>
+
+      </div><!-- /lp-theory -->
+
+      <!-- ═════════════════════════════════ TAB 4: CONTACT ═════════════════════════════════ -->
+      <div class="lp-panel" id="lp-contact">
+
+        <div class="lp-card">
+          <div class="lp-card-title">✉️ Contact &amp; Support</div>
+          <p class="lp-panel-desc">Have questions about the lesson plan or activities? Reach out to the teachers!</p>
+          <div class="lp-contact-cards">
+            <div class="lp-contact-card">
+              <div class="lp-contact-avatar">👩‍🏫</div>
+              <h4>Teacher Laura</h4>
+              <a href="mailto:teacherlaurapro@amigo.edu.co">teacherlaurapro@amigo.edu.co</a>
+              <div class="lp-contact-role">Lead Instructor · English &amp; Literacy</div>
+            </div>
+            <div class="lp-contact-card">
+              <div class="lp-contact-avatar">🦊</div>
+              <h4>Teacher Danny</h4>
+              <a href="mailto:dannyteachernub@amigo.edu.co">dannyteachernub@amigo.edu.co</a>
+              <div class="lp-contact-role">Co-Instructor · Speaking &amp; Vocabulary</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lp-card">
+          <div class="lp-card-title">📩 Send a Message</div>
+          <div class="lp-msg-form">
+            <select id="lp-msg-type" class="lp-select">
+              <option value="">Select a topic…</option>
+              <option>❓ Question about activities</option>
+              <option>📋 Question about evaluation</option>
+              <option>💡 Suggestion</option>
+              <option>🔧 Technical issue</option>
+            </select>
+            <textarea id="lp-msg-text" class="lp-textarea" rows="4" placeholder="Write your message here…"></textarea>
+            <button class="lp-send-btn" onclick="sendLPMessage()">🚀 Send Message</button>
+            <div id="lp-msg-success" class="lp-msg-success hidden">✅ Message sent! We'll reply soon. 🌟</div>
+          </div>
+        </div>
+
+        <div class="lp-card">
+          <div class="lp-card-title">📅 Activity Deadlines</div>
+          <div class="lp-deadlines">
+            <div class="lp-dl-item"><span class="lp-dl-week">Week 1</span><span>Writing &amp; Vocabulary</span><span
+                class="lp-dl-date">Friday — Week 1</span><span class="lp-dl-status lp-dl-done">✅ Done</span></div>
+            <div class="lp-dl-item"><span class="lp-dl-week">Week 2</span><span>Drawing &amp; Reading</span><span
+                class="lp-dl-date">Friday — Week 2</span><span class="lp-dl-status lp-dl-pending">⏳ Pending</span></div>
+            <div class="lp-dl-item"><span class="lp-dl-week">Week 3</span><span>Speaking &amp; Challenge</span><span
+                class="lp-dl-date">Friday — Week 3</span><span class="lp-dl-status lp-dl-pending">⏳ Pending</span></div>
+          </div>
+        </div>
+
+      </div><!-- /lp-contact -->
+
+    </div><!-- /lp-container -->
+
+    <button class="btn-back" onclick="showSection('home')" id="back-from-lp">🔙 Back to Home</button>
+  </section>
+
+  <!-- ===== INTRO OVERLAY (Mandatory Introduction) ===== -->
+  <div id="intro-overlay" class="intro-overlay">
+    <div class="intro-bg-particles">
+      <span class="intro-particle p1">✨</span>
+      <span class="intro-particle p2">⭐</span>
+      <span class="intro-particle p3">🌟</span>
+      <span class="intro-particle p4">🎈</span>
+      <span class="intro-particle p5">💫</span>
+      <span class="intro-particle p6">⭐</span>
+    </div>
+
+    <div class="intro-modal" id="intro-modal">
+
+      <!-- Step indicator -->
+      <div class="intro-steps-indicator">
+        <div class="intro-step-dot active" id="idot-1"></div>
+        <div class="intro-step-dot" id="idot-2"></div>
+        <div class="intro-step-dot" id="idot-3"></div>
+        <div class="intro-step-dot" id="idot-4"></div>
+      </div>
+
+      <!-- SLIDE 1: Welcome -->
+      <div class="intro-slide active" id="islide-1">
+        <img src="zen_mascot.png" class="intro-zen-big" alt="Zen">
+        <h1 class="intro-main-title">Welcome to<br /><span class="intro-gradient">English Adventures!</span></h1>
+        <p class="intro-subtitle">Before we start our journey, let me show you<br />what we will do together! &#128458;&#65039;</p>
+        <div class="intro-teachers">
+          <div class="intro-teacher-pill">&#128105;&#8205;&#127979; Teacher Laura</div>
+          <div class="intro-teacher-pill">&#129418; Teacher Danny</div>
+          <div class="intro-teacher-pill"><img src="zen_mascot.png" class="zen-icon-img" alt="Zen" style="width:20px;height:20px;"> Zen</div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: What will we learn? -->
+      <div class="intro-slide" id="islide-2">
+        <div class="intro-zen-tip"><img src="zen_mascot.png" class="zen-icon-img" alt="Zen" style="width:24px;height:24px;"> <strong>Zen says:</strong> This is our learning map!</div>
+        <h2 class="intro-slide-title">🗺️ Our Learning Map</h2>
+        <p class="intro-slide-desc">Think of this like a GPS for your learning journey — it tells you where we're going!
+        </p>
+        <div class="intro-blocks">
+          <div class="intro-block intro-obj">
+            <span class="intro-block-icon">&#127919;</span>
+            <h4>Objectives</h4>
             <ul>
-              <li>Completing activities</li>
+              <li>Write simple sentences</li>
+              <li>Practice speaking &amp; reading</li>
+            </ul>
+          </div>
+          <div class="intro-block intro-act">
+            <span class="intro-block-icon">&#128640;</span>
+            <h4>Activities</h4>
+            <div class="intro-icons-list">
+              <span>&#9997;&#65039; Writing</span>
+              <span>&#127912; Drawing</span>
+              <span>&#128214; Reading</span>
+              <span>&#128172; Speaking</span>
+              <span>&#127918; Vocabulary</span>
+            </div>
+          </div>
+          <div class="intro-block intro-eval">
+            <span class="intro-block-icon">&#127942;</span>
+            <h4>Evaluation</h4>
+            <ul>
+              <li>Complete activities</li>
               <li>Participation</li>
               <li>Final challenge</li>
             </ul>
           </div>
-
-          <div class="kid-block time-block">
-            <span class="block-icon">⏰</span>
+          <div class="intro-block intro-time">
+            <span class="intro-block-icon">⏳</span>
             <h4>Timeline</h4>
-            <p><strong>When?</strong></p>
-            <ul class="timeline-list">
+            <ul>
               <li><strong>Week 1:</strong> Writing &amp; Vocabulary</li>
               <li><strong>Week 2:</strong> Reading &amp; Drawing</li>
               <li><strong>Week 3:</strong> Speaking &amp; Challenge</li>
@@ -587,129 +1242,89 @@
         </div>
       </div>
 
-      <!-- Section 2: EXAMPLE SECTION -->
-      <div class="planning-card kid-friendly-card">
-        <div class="foxy-tip-bubble">
-          🦊 <strong>Foxy says:</strong> Look at our weekly plan!
-        </div>
-        <h3>Example: Our Learning Weeks</h3>
-        
-        <div class="weekly-example-grid">
-          <div class="week-card">
-            <div class="week-title">Week 1</div>
-            <p><strong>Topic:</strong> "Animals" 🐘</p>
-            <div class="week-section">
-              <strong>Activities:</strong>
-              <ul>
-                <li>Write sentences</li>
-                <li>Vocabulary game</li>
-              </ul>
-            </div>
-            <div class="week-section">
-              <strong>Evaluation:</strong>
-              <p>✅ Complete activity</p>
-            </div>
+      <!-- SLIDE 3: How to navigate -->
+      <div class="intro-slide" id="islide-3">
+        <div class="intro-zen-tip"><img src="zen_mascot.png" class="zen-icon-img" alt="Zen" style="width:24px;height:24px;"> <strong>Zen says:</strong> Follow these steps!</div>
+        <h2 class="intro-slide-title">🗺️ How to Use This Page</h2>
+        <p class="intro-slide-desc">Follow these steps to learn English the fun way!</p>
+        <div class="intro-steps">
+          <div class="intro-step-item">
+            <div class="intro-step-num">1</div>
+            <div class="intro-step-text"><strong>Start</strong> at the Home page &#127968;</div>
           </div>
-          
-          <div class="week-card">
-            <div class="week-title">Week 2</div>
-            <p><strong>Topic:</strong> "My world" 🌎</p>
-            <div class="week-section">
-              <strong>Activities:</strong>
-              <ul>
-                <li>Drawing</li>
-                <li>Reading</li>
-              </ul>
-            </div>
-            <div class="week-section">
-              <strong>Evaluation:</strong>
-              <p>✅ Answer questions</p>
-            </div>
+          <div class="intro-step-item">
+            <div class="intro-step-num">2</div>
+            <div class="intro-step-text"><strong>Meet</strong> the Characters &#128107;</div>
+          </div>
+          <div class="intro-step-item">
+            <div class="intro-step-num">3</div>
+            <div class="intro-step-text"><strong>Do</strong> the Activities &#9997;&#65039; &#127912; &#128214; &#128172; &#127918;</div>
+          </div>
+            <div class="intro-step-item">
+            <div class="intro-step-num">4</div>
+            <div class="intro-step-text"><strong>Earn</strong> all 6 stars &amp; your Certificate &#127942;</div>
           </div>
         </div>
       </div>
 
-      <!-- Section 3: NAVIGATION GUIDE -->
-      <div class="planning-card kid-friendly-card">
-        <h3>How to use this page</h3>
-        <p class="kid-intro">Follow these steps to learn English!</p>
-        <div class="steps-container">
-          <div>
-            <div class="step-circle">1</div>
-            <div class="step-text"><strong>Start</strong> at the Home page</div>
+      <!-- SLIDE 4: Contact & Let's go! -->
+      <div class="intro-slide" id="islide-4">
+        <img src="zen_mascot.png" class="intro-zen-big spin-in" alt="Zen">
+        <h2 class="intro-slide-title">Need Help? &#9993;&#65039;</h2>
+        <div class="intro-contact">
+          <div class="intro-contact-card">
+            <span class="intro-contact-icon">&#128105;&#8205;&#127979;</span>
+            <div>
+              <strong>Teacher Laura</strong>
+              <a href="mailto:teacherlaurapro@amigo.edu.co">teacherlaurapro@amigo.edu.co</a>
+            </div>
           </div>
-          <div>
-            <div class="step-circle">2</div>
-            <div class="step-text"><strong>Follow</strong> the learning path step by step (do not skip)</div>
+          <div class="intro-contact-card">
+            <span class="intro-contact-icon">&#129418;</span>
+            <div>
+              <strong>Teacher Danny</strong>
+              <a href="mailto:dannyteachernub@amigo.edu.co">dannyteachernub@amigo.edu.co</a>
+            </div>
           </div>
-          <div>
-            <div class="step-circle">3</div>
-            <div class="step-text"><strong>First learn</strong> (content)</div>
-          </div>
-          <div>
-            <div class="step-circle">4</div>
-            <div class="step-text"><strong>Then practice</strong> (activities)</div>
-          </div>
-          <div>
-            <div class="step-circle">5</div>
-            <div class="step-text"><strong>Finally create</strong> (your work)</div>
-          </div>
+        </div>
+        <div class="intro-ready-box">
+          <p class="intro-ready-text">&#127881; You're all set! Ready to start your English Adventure?</p>
+          <button class="intro-start-btn" onclick="dismissIntro()" id="intro-start-btn">
+            🚀 Let's Start the Adventure!
+          </button>
         </div>
       </div>
 
-      <!-- Section 4 & 5: COMMUNICATION & CALENDAR -->
-      <div class="two-columns">
-        <div class="planning-card kid-friendly-card col-card">
-          <div class="foxy-tip-bubble">
-            🦊 <strong>Foxy says:</strong> I am here to help!
-          </div>
-          <h3>Need help?</h3>
-          <div class="contact-emails">
-            <p><strong>👩‍🏫 Teacher Laura:</strong> <a href="mailto:teacherlaurapro@amigo.edu.co">teacherlaurapro@amigo.edu.co</a></p>
-            <p><strong>🧸 Teacher Danny:</strong> <a href="mailto:dannyteachernub@amigo.edu.co">dannyteachernub@amigo.edu.co</a></p>
-          </div>
-
-          <div class="help-action-area">
-            <div class="help-buttons" id="help-buttons">
-              <button class="btn-help" onclick="openContactForm('teacher')">👩‍🏫 Ask your teacher</button>
-              <button class="btn-help" onclick="openContactForm('question')">❓ Ask a question</button>
-              <button class="btn-help comments-btn" onclick="openContactForm('suggestion')">💌 Suggestions Box</button>
-            </div>
-
-            <div class="help-form-container hidden" id="help-form-container">
-              <h4 id="help-form-title">Send a message</h4>
-              <textarea id="help-textarea" rows="3" placeholder="Write your message here..."></textarea>
-              <div class="help-form-actions">
-                <button class="btn-cancel" onclick="closeContactForm()">Cancel</button>
-                <button class="btn-send" onclick="sendContactForm()">Send 🚀</button>
-              </div>
-              <div id="help-success" class="hidden">Message sent successfully! 🌟</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="planning-card kid-friendly-card col-card">
-          <h3>Calendar &amp; Progress</h3>
-          <div class="progress-box">
-            <div class="prog-item">
-              <span>Week 1 limit: <strong>Friday</strong></span>
-              <span class="status-badge ✅">Completed</span>
-            </div>
-            <div class="prog-item">
-              <span>Week 2 limit: <strong>Next Friday</strong></span>
-              <span class="status-badge ❌">Not completed</span>
-            </div>
-          </div>
-        </div>
+      <!-- Navigation buttons -->
+      <div class="intro-nav-btns">
+        <button class="intro-nav-prev" id="intro-prev" onclick="introPrev()" style="visibility:hidden;">← Back</button>
+        <button class="intro-nav-next" id="intro-next" onclick="introNext()">Next →</button>
       </div>
-
     </div>
-  </section>
+  </div>
 
-  <!-- ===== FOXY FLOATING GUIDE ===== -->
-  <div class="foxy-floating-guide" id="foxy-floating-guide">
-    <div class="foxy-guide-avatar bounce" id="foxy-avatar-egg" onclick="foxyEasterEgg()">🦊</div>
-    <div class="foxy-guide-text" id="foxy-guide-text">Hi! I’m Foxy! Let’s explore English together!</div>
+  <!-- ===== ZEN FLOATING GUIDE ===== -->
+  <div class="zen-floating-guide" id="zen-floating-guide">
+    <div class="zen-guide-avatar bounce" id="zen-avatar-egg" onclick="ZenEasterEgg()">
+      <div id="zen-main-wrapper" style="position:relative; width: 100%; height: 100%;">
+        <img src="zen_mascot.png" id="zen-main-img" alt="Zen" style="width:100%; height:100%; object-fit:contain; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); transform-origin: center center; transition: transform 0.2s ease-out, filter 0.5s ease;" />
+        
+        <!-- Particles -->
+        <svg class="zen-particles" viewBox="0 0 120 148" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:visible;">
+          <circle class="zp p1" cx="0" cy="30" r="4" fill="#FCD34D" opacity="0"/>
+          <circle class="zp p2" cx="110" cy="15" r="3.5" fill="#A2D2FF" opacity="0"/>
+          <circle class="zp p3" cx="0" cy="80" r="3" fill="#F9A8D4" opacity="0"/>
+          <circle class="zp p4" cx="115" cy="80" r="3.5" fill="#6EE7B7" opacity="0"/>
+        </svg>
+        
+        <!-- Sleep Zzz -->
+        <svg class="zen-sleep-z" viewBox="0 0 120 148" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:visible;" opacity="0">
+          <text x="85" y="25" font-family="Nunito" font-weight="800" font-size="16" fill="#A2D2FF" class="zz1">Z</text>
+          <text x="100" y="10" font-family="Nunito" font-weight="800" font-size="22" fill="#C4B5FD" class="zz2">Z</text>
+        </svg>
+      </div>
+    </div>
+    <div class="zen-guide-text" id="zen-guide-text">Hi! I'm Zen! Let's explore English together!</div>
   </div>
 
   <!-- ===== FEEDBACK MODAL ===== -->
@@ -738,20 +1353,21 @@
         <h2>🏆 Certificate of Achievement 🏆</h2>
         <p>This certifies that</p>
         <div class="cert-input-wrapper">
-          <input type="text" id="cert-name" placeholder="Type your name here..." autocomplete="off" spellcheck="false" />
+          <input type="text" id="cert-name" placeholder="Type your name here..." autocomplete="off"
+            spellcheck="false" />
         </div>
         <p>has successfully completed the</p>
         <h3>English Adventures Journey!</h3>
-        <p>Earning all 6 ⭐ from Foxy the Smart Fox.</p>
+        <p>Earning all 6 ⭐ from Zen the Smart Fox.</p>
         <div class="cert-signatures">
           <div class="sig">
-            <span class="sig-line">✏️ Teacher Laura</span>
+            <span class="sig-line">✍️ Teacher Laura</span>
           </div>
           <div class="sig">
-            <span class="sig-line">🧸 Teacher Danny</span>
+            <span class="sig-line">🦊 Teacher Danny</span>
           </div>
           <div class="sig">
-            <span class="sig-line">🦊 Foxy</span>
+            <span class="sig-line"><img src="zen_mascot.png" class="zen-icon-img" alt="Zen" style="width:20px;height:20px;"> Zen</span>
           </div>
         </div>
       </div>
@@ -763,5 +1379,15 @@
   </div>
 
   <script src="script.js"></script>
+  <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" aria-hidden="true">
+    <filter id="zenChromaKey" color-interpolation-filters="sRGB">
+      <!-- This matrix targets dark/grey backgrounds and turns them transparent -->
+      <!-- It calculates Alpha based on the inverse of the average brightness -->
+      <feColorMatrix type="matrix" values="1 0 0 0 0
+                                           0 1 0 0 0
+                                           0 0 1 0 0
+                                           -1.5 -1.5 -1.5 3.5 -0.1" />
+    </filter>
+  </svg>
 </body>
 </html>
